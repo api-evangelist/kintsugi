@@ -1,0 +1,231 @@
+{
+  "info": {
+    "name": "Kintsugi Tax API",
+    "description": "Kintsugi AI sales tax compliance and automation platform REST API. Base URL https://api.trykintsugi.com/v1. Authenticate with the x-api-key header plus an x-organization-id header.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "x-api-key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.trykintsugi.com/v1" },
+    { "key": "apiKey", "value": "" },
+    { "key": "organizationId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Tax Estimation",
+      "item": [
+        {
+          "name": "Estimate tax for a transaction.",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "x-organization-id", "value": "{{organizationId}}" }
+            ],
+            "url": { "raw": "{{baseUrl}}/tax/estimate", "host": ["{{baseUrl}}"], "path": ["tax", "estimate"] },
+            "body": { "mode": "raw", "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"2026-06-21T00:00:00Z\",\n  \"currency\": \"USD\",\n  \"addresses\": [\n    {\n      \"type\": \"SHIP_TO\",\n      \"street_1\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"postal_code\": \"<string>\",\n      \"country\": \"US\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"external_id\": \"<string>\",\n      \"amount\": 100,\n      \"quantity\": 1,\n      \"date\": \"2026-06-21T00:00:00Z\"\n    }\n  ]\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create a transaction.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions", "host": ["{{baseUrl}}"], "path": ["transactions"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List transactions.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions", "host": ["{{baseUrl}}"], "path": ["transactions"] } }
+        },
+        {
+          "name": "Get a transaction by ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions/:id", "host": ["{{baseUrl}}"], "path": ["transactions", ":id"] } }
+        },
+        {
+          "name": "Get a transaction by external ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions/external/:external_id", "host": ["{{baseUrl}}"], "path": ["transactions", "external", ":external_id"] } }
+        },
+        {
+          "name": "Update a transaction.",
+          "request": { "method": "PATCH", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions/:id", "host": ["{{baseUrl}}"], "path": ["transactions", ":id"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "Create a credit note for a transaction.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions/:id/credit-notes", "host": ["{{baseUrl}}"], "path": ["transactions", ":id", "credit-notes"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "Update a credit note for a transaction.",
+          "request": { "method": "PATCH", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/transactions/:id/credit-notes", "host": ["{{baseUrl}}"], "path": ["transactions", ":id", "credit-notes"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "Get transactions for a filing.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/filings/:filing_id/transactions", "host": ["{{baseUrl}}"], "path": ["filings", ":filing_id", "transactions"] } }
+        }
+      ]
+    },
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create a customer.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List customers.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/customers", "host": ["{{baseUrl}}"], "path": ["customers"] } }
+        },
+        {
+          "name": "Get a customer by ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/customers/:id", "host": ["{{baseUrl}}"], "path": ["customers", ":id"] } }
+        },
+        {
+          "name": "Get a customer by external ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/customers/external/:external_id", "host": ["{{baseUrl}}"], "path": ["customers", "external", ":external_id"] } }
+        },
+        {
+          "name": "Update a customer.",
+          "request": { "method": "PATCH", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/customers/:id", "host": ["{{baseUrl}}"], "path": ["customers", ":id"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "Create a product.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List products.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/products", "host": ["{{baseUrl}}"], "path": ["products"] } }
+        },
+        {
+          "name": "Get a product by ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/products/:id", "host": ["{{baseUrl}}"], "path": ["products", ":id"] } }
+        },
+        {
+          "name": "Update a product.",
+          "request": { "method": "PATCH", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/products/:id", "host": ["{{baseUrl}}"], "path": ["products", ":id"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List product categories.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/products/categories", "host": ["{{baseUrl}}"], "path": ["products", "categories"] } }
+        }
+      ]
+    },
+    {
+      "name": "Address Validation",
+      "item": [
+        {
+          "name": "Validate and search an address.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/addresses/search", "host": ["{{baseUrl}}"], "path": ["addresses", "search"] } }
+        },
+        {
+          "name": "Get address suggestions.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/addresses/suggestions", "host": ["{{baseUrl}}"], "path": ["addresses", "suggestions"] } }
+        }
+      ]
+    },
+    {
+      "name": "Nexus",
+      "item": [
+        {
+          "name": "Get nexus status for the organization.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/nexus", "host": ["{{baseUrl}}"], "path": ["nexus"] } }
+        },
+        {
+          "name": "Create a physical nexus.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/nexus/physical", "host": ["{{baseUrl}}"], "path": ["nexus", "physical"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List physical nexus entries.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/nexus/physical", "host": ["{{baseUrl}}"], "path": ["nexus", "physical"] } }
+        },
+        {
+          "name": "Update a physical nexus.",
+          "request": { "method": "PATCH", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/nexus/physical/:id", "host": ["{{baseUrl}}"], "path": ["nexus", "physical", ":id"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "Delete a physical nexus.",
+          "request": { "method": "DELETE", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/nexus/physical/:id", "host": ["{{baseUrl}}"], "path": ["nexus", "physical", ":id"] } }
+        }
+      ]
+    },
+    {
+      "name": "Exemptions",
+      "item": [
+        {
+          "name": "Create an exemption.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/exemptions", "host": ["{{baseUrl}}"], "path": ["exemptions"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List exemptions.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/exemptions", "host": ["{{baseUrl}}"], "path": ["exemptions"] } }
+        },
+        {
+          "name": "Get an exemption by ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/exemptions/:id", "host": ["{{baseUrl}}"], "path": ["exemptions", ":id"] } }
+        },
+        {
+          "name": "Upload an exemption certificate.",
+          "request": { "method": "POST", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/exemptions/:id/certificates", "host": ["{{baseUrl}}"], "path": ["exemptions", ":id", "certificates"] }, "body": { "mode": "formdata", "formdata": [ { "key": "file", "type": "file", "src": [] } ] } }
+        },
+        {
+          "name": "Get attachments for an exemption.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/exemptions/:id/attachments", "host": ["{{baseUrl}}"], "path": ["exemptions", ":id", "attachments"] } }
+        }
+      ]
+    },
+    {
+      "name": "Registrations",
+      "item": [
+        {
+          "name": "Create a registration.",
+          "request": { "method": "POST", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/registrations", "host": ["{{baseUrl}}"], "path": ["registrations"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "List registrations.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/registrations", "host": ["{{baseUrl}}"], "path": ["registrations"] } }
+        },
+        {
+          "name": "Get a registration by ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/registrations/:id", "host": ["{{baseUrl}}"], "path": ["registrations", ":id"] } }
+        },
+        {
+          "name": "Update a registration.",
+          "request": { "method": "PATCH", "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/registrations/:id", "host": ["{{baseUrl}}"], "path": ["registrations", ":id"] }, "body": { "mode": "raw", "raw": "{}", "options": { "raw": { "language": "json" } } } }
+        },
+        {
+          "name": "Deregister a registration.",
+          "request": { "method": "POST", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/registrations/:id/deregister", "host": ["{{baseUrl}}"], "path": ["registrations", ":id", "deregister"] } }
+        },
+        {
+          "name": "Get filings for a registration.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/registrations/:registration_id/filings", "host": ["{{baseUrl}}"], "path": ["registrations", ":registration_id", "filings"] } }
+        }
+      ]
+    },
+    {
+      "name": "Filings",
+      "item": [
+        {
+          "name": "List filings.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/filings", "host": ["{{baseUrl}}"], "path": ["filings"] } }
+        },
+        {
+          "name": "Get a filing by ID.",
+          "request": { "method": "GET", "header": [ { "key": "x-organization-id", "value": "{{organizationId}}" } ], "url": { "raw": "{{baseUrl}}/filings/:id", "host": ["{{baseUrl}}"], "path": ["filings", ":id"] } }
+        }
+      ]
+    }
+  ]
+}

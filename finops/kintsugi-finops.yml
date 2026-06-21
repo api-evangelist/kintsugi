@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Kintsugi
+providerId: kintsugi
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Sales Tax
+- Tax Compliance
+- Tax Automation
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Kintsugi spend. Kintsugi bills compliance outcomes - sales tax
+  filings and state registrations - rather than per-API-call usage. Nexus
+  monitoring is free; the Growth plan bills per filing and per registration; the
+  Premium plan is a flat monthly subscription covering a set number of states;
+  Enterprise is negotiated. The API itself is included with a paid plan, so the
+  primary cost drivers are number of filings, number of registrations, and
+  states covered. Figures are not reconciled.
+notes: >-
+  Cost drivers for a tax-compliance platform are filing and registration
+  volume by jurisdiction, not API request counts. Verify per-filing and
+  per-registration fees and Premium state coverage against the Kintsugi
+  pricing page during reconciliation.
+sources:
+- https://www.trykintsugi.com/pricing
+- https://docs.trykintsugi.com
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Kintsugi
+serviceCategory: Tax Compliance and Automation
+billingModel:
+  pricingCategory: Hybrid
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Kintsugi
+  ServiceCategory: Tax Compliance and Automation
+  ProviderName: Kintsugi
+  PublisherName: Kintsugi
+  InvoiceIssuerName: Kintsugi
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: filings
+  description: Sales tax returns prepared and filed, billed per filing on per-action plans.
+  unit: filings
+  aggregation: sum
+  dimensions:
+  - organization
+  - state
+- name: registrations
+  description: State tax registrations completed, billed per registration on per-action plans.
+  unit: registrations
+  aggregation: sum
+  dimensions:
+  - organization
+  - state
+- name: subscription
+  description: Flat monthly subscription fee on the Premium plan covering a set number of states.
+  unit: months
+  aggregation: sum
+  dimensions:
+  - organization
+- name: states_covered
+  description: Number of states under active monitoring, registration, and filing.
+  unit: states
+  aggregation: max
+  dimensions:
+  - organization
+principles:
+- name: Visibility
+  description: Track active registrations and monthly filings by state; reconcile against the Kintsugi dashboard.
+- name: Allocation
+  description: Attribute filing and registration costs to the legal entities and states that generate the nexus obligation.
+- name: Optimization
+  description: Use free nexus monitoring to avoid premature registrations; compare per-filing Growth costs against flat-rate Premium once filing in more than a handful of states each month.
+- name: Accountability
+  description: Assign a compliance owner who reviews where new nexus is approaching and approves new registrations before filing fees accrue.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

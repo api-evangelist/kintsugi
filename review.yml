@@ -1,0 +1,115 @@
+aid: kintsugi
+name: Kintsugi
+review:
+  question: Which Kintsugi is this catalog about, and does it expose a documented public REST API?
+  answer: true
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  disambiguation: true
+findings:
+  summary: |
+    This catalog covers Kintsugi the AI sales tax compliance and automation
+    platform (trykintsugi.com), NOT the unrelated Kintsugi mental-health /
+    voice-biomarker company (Kintsugi Mindful Wellness / kintsugihello.com).
+    The sales-tax Kintsugi publishes a documented public REST API at
+    https://api.trykintsugi.com/v1 with developer docs at docs.trykintsugi.com,
+    official SDKs (Python, TypeScript, Java, PHP, Ruby) under the GitHub
+    organization github.com/kintsugi-tax, an MCP server, and OpenAPI
+    specifications. The API covers real-time tax estimation, transactions,
+    customers, products and tax codes, address validation, nexus,
+    registrations, exemptions, and filings.
+  disambiguation:
+    correctEntity:
+      name: Kintsugi (sales tax automation)
+      website: https://www.trykintsugi.com
+      docs: https://docs.trykintsugi.com
+      github: https://github.com/kintsugi-tax
+      sector: Sales tax / VAT / GST compliance and automation
+    notThisEntity:
+      name: Kintsugi Mindful Wellness
+      sector: Mental health, voice-based biomarker screening
+      note: Distinct company sharing the Kintsugi name; out of scope for this catalog.
+  authentication:
+    scheme: apiKey
+    headers:
+      - name: x-api-key
+        note: API key generated in the Kintsugi dashboard.
+      - name: x-organization-id
+        note: Identifies the organization the request acts on behalf of.
+    bearerNote: |
+      Kintsugi documents API-key header authentication (x-api-key plus
+      x-organization-id), not HTTP Bearer token authentication. The OpenAPI
+      security scheme in this repo models the documented apiKey headers
+      accordingly.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.trykintsugi.com/v1
+      documented: true
+    - protocol: Webhooks
+      scheme: https
+      documented: true
+      note: Event notifications referenced in integration guidance; payload contract not fully enumerated in the public reference.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket or streaming API is documented.
+  endpointsConfirmedRest:
+    - POST   https://api.trykintsugi.com/v1/tax/estimate
+    - POST   https://api.trykintsugi.com/v1/transactions
+    - GET    https://api.trykintsugi.com/v1/transactions
+    - GET    https://api.trykintsugi.com/v1/transactions/{id}
+    - GET    https://api.trykintsugi.com/v1/transactions/external/{external_id}
+    - PATCH  https://api.trykintsugi.com/v1/transactions/{id}
+    - POST   https://api.trykintsugi.com/v1/transactions/{id}/credit-notes
+    - PATCH  https://api.trykintsugi.com/v1/transactions/{id}/credit-notes
+    - GET    https://api.trykintsugi.com/v1/filings/{filing_id}/transactions
+    - POST   https://api.trykintsugi.com/v1/customers
+    - GET    https://api.trykintsugi.com/v1/customers
+    - GET    https://api.trykintsugi.com/v1/customers/{id}
+    - GET    https://api.trykintsugi.com/v1/customers/external/{external_id}
+    - PATCH  https://api.trykintsugi.com/v1/customers/{id}
+    - POST   https://api.trykintsugi.com/v1/products
+    - GET    https://api.trykintsugi.com/v1/products
+    - GET    https://api.trykintsugi.com/v1/products/{id}
+    - PATCH  https://api.trykintsugi.com/v1/products/{id}
+    - GET    https://api.trykintsugi.com/v1/products/categories
+    - GET    https://api.trykintsugi.com/v1/addresses/search
+    - GET    https://api.trykintsugi.com/v1/addresses/suggestions
+    - POST   https://api.trykintsugi.com/v1/nexus/physical
+    - GET    https://api.trykintsugi.com/v1/nexus
+    - GET    https://api.trykintsugi.com/v1/nexus/physical
+    - PATCH  https://api.trykintsugi.com/v1/nexus/physical/{id}
+    - DELETE https://api.trykintsugi.com/v1/nexus/physical/{id}
+    - POST   https://api.trykintsugi.com/v1/exemptions
+    - GET    https://api.trykintsugi.com/v1/exemptions
+    - GET    https://api.trykintsugi.com/v1/exemptions/{id}
+    - POST   https://api.trykintsugi.com/v1/exemptions/{id}/certificates
+    - GET    https://api.trykintsugi.com/v1/exemptions/{id}/attachments
+    - POST   https://api.trykintsugi.com/v1/registrations
+    - GET    https://api.trykintsugi.com/v1/registrations
+    - GET    https://api.trykintsugi.com/v1/registrations/{id}
+    - PATCH  https://api.trykintsugi.com/v1/registrations/{id}
+    - POST   https://api.trykintsugi.com/v1/registrations/{id}/deregister
+    - GET    https://api.trykintsugi.com/v1/registrations/{registration_id}/filings
+    - GET    https://api.trykintsugi.com/v1/filings
+    - GET    https://api.trykintsugi.com/v1/filings/{id}
+sources:
+  - url: https://docs.trykintsugi.com/llms.txt
+    type: Documentation
+    note: Master index of API reference endpoints, guides, SDKs, and OpenAPI specs.
+  - url: https://docs.trykintsugi.com/docs/making-authenticate-request-using-api-key
+    type: Documentation
+    note: Confirms x-api-key plus x-organization-id header auth and base URL https://api.trykintsugi.com/v1.
+  - url: https://docs.trykintsugi.com/reference/api/tax-estimation/estimate-tax
+    type: APIReference
+    note: POST /tax/estimate request and response schema.
+  - url: https://www.trykintsugi.com/product/api
+    type: Documentation
+    note: API product overview for the sales-tax platform.
+  - url: https://github.com/kintsugi-tax
+    type: GitHubOrganization
+    note: Official org hosting the language SDK repositories.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

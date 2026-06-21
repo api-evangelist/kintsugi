@@ -1,0 +1,1237 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax API
+  description: >-
+    REST API for the Kintsugi AI sales tax compliance and automation platform.
+    Calculate US sales tax, VAT, and GST; sync transactions, products, and
+    customers; validate addresses; manage physical nexus, exemptions, and
+    registrations; and retrieve automated filings. Authentication uses an API
+    key supplied in the x-api-key header together with the x-organization-id
+    header identifying the organization. Endpoints, fields, and schemas in this
+    document reflect Kintsugi's public API reference at docs.trykintsugi.com and
+    are not exhaustive; consult the provider documentation for the authoritative
+    contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+  - url: https://api.trykintsugi.com/v1
+    description: Kintsugi production API base URL
+security:
+  - ApiKeyAuth: []
+    OrganizationId: []
+tags:
+  - name: Tax Estimation
+    description: Real-time sales tax, VAT, and GST estimation.
+  - name: Transactions
+    description: Committed sales transactions and credit notes.
+  - name: Customers
+    description: Customer records and their transactions.
+  - name: Products
+    description: Product records and taxability classification.
+  - name: Address Validation
+    description: Address search and suggestions for jurisdiction assignment.
+  - name: Nexus
+    description: Physical and economic nexus tracking.
+  - name: Exemptions
+    description: Customer tax exemptions and certificates.
+  - name: Registrations
+    description: State tax registrations.
+  - name: Filings
+    description: Prepared and submitted sales tax returns.
+paths:
+  /tax/estimate:
+    post:
+      operationId: estimateTax
+      tags:
+        - Tax Estimation
+      summary: Estimate tax for a transaction.
+      description: >-
+        Calculates sales tax, VAT, or GST for a prospective transaction before
+        payment is collected. Returns a jurisdiction-level breakdown, the
+        taxable amount, the effective tax rate, and whether an active
+        registration exists, without persisting a transaction record.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionEstimateRequest'
+      responses:
+        '200':
+          description: Tax estimate calculated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEstimateResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+  /transactions:
+    post:
+      operationId: createTransaction
+      tags:
+        - Transactions
+      summary: Create a transaction.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '201':
+          description: Transaction created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    get:
+      operationId: getTransactions
+      tags:
+        - Transactions
+      summary: List transactions.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of transactions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /transactions/{id}:
+    get:
+      operationId: getTransactionById
+      tags:
+        - Transactions
+      summary: Get a transaction by ID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTransaction
+      tags:
+        - Transactions
+      summary: Update a transaction.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '200':
+          description: Transaction updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /transactions/external/{external_id}:
+    get:
+      operationId: getTransactionByExternalId
+      tags:
+        - Transactions
+      summary: Get a transaction by external ID.
+      parameters:
+        - $ref: '#/components/parameters/ExternalId'
+      responses:
+        '200':
+          description: The requested transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /transactions/{id}/credit-notes:
+    post:
+      operationId: createCreditNoteByTransactionId
+      tags:
+        - Transactions
+      summary: Create a credit note for a transaction.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteRequest'
+      responses:
+        '201':
+          description: Credit note created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    patch:
+      operationId: updateCreditNoteByTransactionId
+      tags:
+        - Transactions
+      summary: Update a credit note for a transaction.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteRequest'
+      responses:
+        '200':
+          description: Credit note updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+  /customers:
+    post:
+      operationId: createCustomer
+      tags:
+        - Customers
+      summary: Create a customer.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '201':
+          description: Customer created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+    get:
+      operationId: getCustomers
+      tags:
+        - Customers
+      summary: List customers.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of customers.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerPage'
+  /customers/{id}:
+    get:
+      operationId: getCustomerById
+      tags:
+        - Customers
+      summary: Get a customer by ID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateCustomer
+      tags:
+        - Customers
+      summary: Update a customer.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: Customer updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /customers/external/{external_id}:
+    get:
+      operationId: getCustomerByExternalId
+      tags:
+        - Customers
+      summary: Get a customer by external ID.
+      parameters:
+        - $ref: '#/components/parameters/ExternalId'
+      responses:
+        '200':
+          description: The requested customer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /products:
+    post:
+      operationId: createProduct
+      tags:
+        - Products
+      summary: Create a product.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '201':
+          description: Product created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    get:
+      operationId: getProducts
+      tags:
+        - Products
+      summary: List products.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of products.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPage'
+  /products/{id}:
+    get:
+      operationId: getProductById
+      tags:
+        - Products
+      summary: Get a product by ID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateProduct
+      tags:
+        - Products
+      summary: Update a product.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: Product updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /products/categories:
+    get:
+      operationId: getProductCategories
+      tags:
+        - Products
+      summary: List product categories.
+      responses:
+        '200':
+          description: Available product categories used for taxability mapping.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductCategory'
+  /addresses/search:
+    get:
+      operationId: searchAddress
+      tags:
+        - Address Validation
+      summary: Validate and search an address.
+      parameters:
+        - name: street_1
+          in: query
+          schema:
+            type: string
+        - name: city
+          in: query
+          schema:
+            type: string
+        - name: state
+          in: query
+          schema:
+            type: string
+        - name: postal_code
+          in: query
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The validated address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+  /addresses/suggestions:
+    get:
+      operationId: getAddressSuggestions
+      tags:
+        - Address Validation
+      summary: Get address suggestions.
+      parameters:
+        - name: query
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Suggested addresses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+  /nexus:
+    get:
+      operationId: getNexusForOrg
+      tags:
+        - Nexus
+      summary: Get nexus status for the organization.
+      responses:
+        '200':
+          description: Nexus status across jurisdictions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Nexus'
+  /nexus/physical:
+    post:
+      operationId: createPhysicalNexus
+      tags:
+        - Nexus
+      summary: Create a physical nexus.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhysicalNexusRequest'
+      responses:
+        '201':
+          description: Physical nexus created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nexus'
+    get:
+      operationId: getPhysicalNexus
+      tags:
+        - Nexus
+      summary: List physical nexus entries.
+      responses:
+        '200':
+          description: Physical nexus entries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Nexus'
+  /nexus/physical/{id}:
+    patch:
+      operationId: updatePhysicalNexus
+      tags:
+        - Nexus
+      summary: Update a physical nexus.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhysicalNexusRequest'
+      responses:
+        '200':
+          description: Physical nexus updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nexus'
+    delete:
+      operationId: deletePhysicalNexus
+      tags:
+        - Nexus
+      summary: Delete a physical nexus.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '204':
+          description: Physical nexus deleted.
+  /exemptions:
+    post:
+      operationId: createExemption
+      tags:
+        - Exemptions
+      summary: Create an exemption.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExemptionRequest'
+      responses:
+        '201':
+          description: Exemption created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exemption'
+    get:
+      operationId: getExemptions
+      tags:
+        - Exemptions
+      summary: List exemptions.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of exemptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExemptionPage'
+  /exemptions/{id}:
+    get:
+      operationId: getExemptionById
+      tags:
+        - Exemptions
+      summary: Get an exemption by ID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested exemption.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exemption'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /exemptions/{id}/certificates:
+    post:
+      operationId: uploadExemptionCertificate
+      tags:
+        - Exemptions
+      summary: Upload an exemption certificate.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Certificate uploaded.
+  /exemptions/{id}/attachments:
+    get:
+      operationId: getAttachmentsForExemption
+      tags:
+        - Exemptions
+      summary: Get attachments for an exemption.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Exemption attachments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attachment'
+  /registrations:
+    post:
+      operationId: createRegistration
+      tags:
+        - Registrations
+      summary: Create a registration.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '201':
+          description: Registration created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+    get:
+      operationId: getRegistrations
+      tags:
+        - Registrations
+      summary: List registrations.
+      responses:
+        '200':
+          description: Registrations for the organization.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registration'
+  /registrations/{id}:
+    get:
+      operationId: getRegistrationById
+      tags:
+        - Registrations
+      summary: Get a registration by ID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested registration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateRegistration
+      tags:
+        - Registrations
+      summary: Update a registration.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: Registration updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+  /registrations/{id}/deregister:
+    post:
+      operationId: deregisterRegistration
+      tags:
+        - Registrations
+      summary: Deregister a registration.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Registration deregistered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+  /filings:
+    get:
+      operationId: getFilings
+      tags:
+        - Filings
+      summary: List filings.
+      parameters:
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of filings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilingPage'
+  /filings/{id}:
+    get:
+      operationId: getFilingById
+      tags:
+        - Filings
+      summary: Get a filing by ID.
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested filing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Filing'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /filings/{filing_id}/transactions:
+    get:
+      operationId: getTransactionsByFilingId
+      tags:
+        - Filings
+      summary: Get transactions for a filing.
+      parameters:
+        - name: filing_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transactions included in the filing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPage'
+  /registrations/{registration_id}/filings:
+    get:
+      operationId: getFilingsByRegistrationId
+      tags:
+        - Filings
+      summary: Get filings for a registration.
+      parameters:
+        - name: registration_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Filings for the registration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilingPage'
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    ExternalId:
+      name: external_id
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key or organization ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: Request validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Address:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+            - SHIP_TO
+            - BILL_TO
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        full_address:
+          type: string
+      required:
+        - postal_code
+        - country
+    TransactionItemEstimate:
+      type: object
+      properties:
+        external_id:
+          type: string
+        external_product_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
+          type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+        - amount
+        - date
+    TransactionEstimateRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+          example: USD
+        description:
+          type: string
+        marketplace:
+          type: boolean
+          default: false
+        customer:
+          $ref: '#/components/schemas/CustomerRequest'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
+      required:
+        - external_id
+        - date
+        - currency
+        - addresses
+        - transaction_items
+    TaxItemEstimate:
+      type: object
+      properties:
+        jurisdiction:
+          type: string
+        jurisdiction_type:
+          type: string
+        tax_rate:
+          type: string
+        tax_amount:
+          type: string
+    TransactionItemEstimateResponse:
+      allOf:
+        - $ref: '#/components/schemas/TransactionItemEstimate'
+        - type: object
+          properties:
+            tax_amount:
+              type: string
+            taxable_amount:
+              type: string
+            tax_rate:
+              type: string
+            exempt_reason:
+              type: string
+            tax_items:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaxItemEstimate'
+    TransactionEstimateResponse:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        total_tax_amount_calculated:
+          type: string
+        taxable_amount:
+          type: string
+        tax_rate_calculated:
+          type: string
+        has_active_registration:
+          type: boolean
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimateResponse'
+    TransactionRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        status:
+          type: string
+        external_customer_id:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
+      required:
+        - external_id
+        - date
+        - currency
+    Transaction:
+      allOf:
+        - $ref: '#/components/schemas/TransactionRequest'
+        - type: object
+          properties:
+            id:
+              type: string
+            total_tax_amount_calculated:
+              type: string
+            taxable_amount:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+            updated_at:
+              type: string
+              format: date-time
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
+    CreditNoteRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        reason:
+          type: string
+    CustomerRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+    Customer:
+      allOf:
+        - $ref: '#/components/schemas/CustomerRequest'
+        - type: object
+          properties:
+            id:
+              type: string
+            created_at:
+              type: string
+              format: date-time
+    CustomerPage:
+      $ref: '#/components/schemas/Page'
+    ProductRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+    Product:
+      allOf:
+        - $ref: '#/components/schemas/ProductRequest'
+        - type: object
+          properties:
+            id:
+              type: string
+    ProductPage:
+      $ref: '#/components/schemas/Page'
+    ProductCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+        description:
+          type: string
+    Nexus:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        nexus_type:
+          type: string
+          enum:
+            - PHYSICAL
+            - ECONOMIC
+        status:
+          type: string
+        registration_id:
+          type: string
+    PhysicalNexusRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+      required:
+        - state
+    Exemption:
+      type: object
+      properties:
+        id:
+          type: string
+        external_customer_id:
+          type: string
+        state:
+          type: string
+        exemption_type:
+          type: string
+        status:
+          type: string
+        valid_from:
+          type: string
+          format: date
+        valid_to:
+          type: string
+          format: date
+    ExemptionRequest:
+      type: object
+      properties:
+        external_customer_id:
+          type: string
+        state:
+          type: string
+        exemption_type:
+          type: string
+        valid_from:
+          type: string
+          format: date
+        valid_to:
+          type: string
+          format: date
+      required:
+        - external_customer_id
+        - state
+    ExemptionPage:
+      $ref: '#/components/schemas/Page'
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+        filename:
+          type: string
+        url:
+          type: string
+        content_type:
+          type: string
+    Registration:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        registration_number:
+          type: string
+        status:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        filing_frequency:
+          type: string
+    RegistrationRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        effective_date:
+          type: string
+          format: date
+      required:
+        - state
+    Filing:
+      type: object
+      properties:
+        id:
+          type: string
+        registration_id:
+          type: string
+        state:
+          type: string
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        status:
+          type: string
+        total_tax_due:
+          type: string
+        filed_at:
+          type: string
+          format: date-time
+    FilingPage:
+      $ref: '#/components/schemas/Page'
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer

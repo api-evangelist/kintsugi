@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": [
+        { "key": "key", "value": "x-api-key" },
+        { "key": "value", "value": "{{apiKey}}" },
+        { "key": "in", "value": "header" }
+      ]
+    },
+    "header": [
+      { "key": "x-organization-id", "value": "{{organizationId}}" }
+    ]
+  },
+  "items": [
+    {
+      "info": { "name": "Tax Estimation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Estimate tax for a transaction.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/tax/estimate",
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Calculates sales tax, VAT, or GST for a transaction before payment, returning a jurisdiction-level breakdown without persisting a record."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Transactions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a transaction.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/transactions", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a committed sales transaction."
+        },
+        {
+          "info": { "name": "List transactions.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/transactions" },
+          "docs": "List transactions with pagination."
+        },
+        {
+          "info": { "name": "Get a transaction by ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/transactions/{id}" },
+          "docs": "Retrieve a transaction by its Kintsugi ID."
+        },
+        {
+          "info": { "name": "Get a transaction by external ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/transactions/external/{external_id}" },
+          "docs": "Retrieve a transaction by external ID."
+        },
+        {
+          "info": { "name": "Update a transaction.", "type": "http" },
+          "http": { "method": "PATCH", "url": "https://api.trykintsugi.com/v1/transactions/{id}", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update a transaction."
+        },
+        {
+          "info": { "name": "Create a credit note for a transaction.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/transactions/{id}/credit-notes", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a credit note against a transaction."
+        },
+        {
+          "info": { "name": "Update a credit note for a transaction.", "type": "http" },
+          "http": { "method": "PATCH", "url": "https://api.trykintsugi.com/v1/transactions/{id}/credit-notes", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update a credit note on a transaction."
+        },
+        {
+          "info": { "name": "Get transactions for a filing.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/filings/{filing_id}/transactions" },
+          "docs": "List transactions included in a filing."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Customers", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a customer.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/customers", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a customer record."
+        },
+        {
+          "info": { "name": "List customers.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/customers" },
+          "docs": "List customers with pagination."
+        },
+        {
+          "info": { "name": "Get a customer by ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/customers/{id}" },
+          "docs": "Retrieve a customer by ID."
+        },
+        {
+          "info": { "name": "Get a customer by external ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/customers/external/{external_id}" },
+          "docs": "Retrieve a customer by external ID."
+        },
+        {
+          "info": { "name": "Update a customer.", "type": "http" },
+          "http": { "method": "PATCH", "url": "https://api.trykintsugi.com/v1/customers/{id}", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update a customer record."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Products", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a product.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/products", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a product with taxability classification."
+        },
+        {
+          "info": { "name": "List products.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/products" },
+          "docs": "List products with pagination."
+        },
+        {
+          "info": { "name": "Get a product by ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/products/{id}" },
+          "docs": "Retrieve a product by ID."
+        },
+        {
+          "info": { "name": "Update a product.", "type": "http" },
+          "http": { "method": "PATCH", "url": "https://api.trykintsugi.com/v1/products/{id}", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update a product."
+        },
+        {
+          "info": { "name": "List product categories.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/products/categories" },
+          "docs": "List product categories used for taxability mapping."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Address Validation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Validate and search an address.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/addresses/search" },
+          "docs": "Validate an address and resolve jurisdiction."
+        },
+        {
+          "info": { "name": "Get address suggestions.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/addresses/suggestions" },
+          "docs": "Return suggested addresses for a query."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Nexus", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get nexus status for the organization.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/nexus" },
+          "docs": "Get nexus status across jurisdictions."
+        },
+        {
+          "info": { "name": "Create a physical nexus.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/nexus/physical", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a physical nexus entry."
+        },
+        {
+          "info": { "name": "List physical nexus entries.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/nexus/physical" },
+          "docs": "List physical nexus entries."
+        },
+        {
+          "info": { "name": "Update a physical nexus.", "type": "http" },
+          "http": { "method": "PATCH", "url": "https://api.trykintsugi.com/v1/nexus/physical/{id}", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update a physical nexus entry."
+        },
+        {
+          "info": { "name": "Delete a physical nexus.", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://api.trykintsugi.com/v1/nexus/physical/{id}" },
+          "docs": "Delete a physical nexus entry."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Exemptions", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create an exemption.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/exemptions", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a customer tax exemption."
+        },
+        {
+          "info": { "name": "List exemptions.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/exemptions" },
+          "docs": "List exemptions with pagination."
+        },
+        {
+          "info": { "name": "Get an exemption by ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/exemptions/{id}" },
+          "docs": "Retrieve an exemption by ID."
+        },
+        {
+          "info": { "name": "Upload an exemption certificate.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/exemptions/{id}/certificates", "body": { "type": "multipart-form", "data": [] } },
+          "docs": "Upload an exemption certificate file."
+        },
+        {
+          "info": { "name": "Get attachments for an exemption.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/exemptions/{id}/attachments" },
+          "docs": "List attachments for an exemption."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Registrations", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a registration.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/registrations", "body": { "type": "json", "data": "{}" } },
+          "docs": "Create a state tax registration."
+        },
+        {
+          "info": { "name": "List registrations.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/registrations" },
+          "docs": "List registrations for the organization."
+        },
+        {
+          "info": { "name": "Get a registration by ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/registrations/{id}" },
+          "docs": "Retrieve a registration by ID."
+        },
+        {
+          "info": { "name": "Update a registration.", "type": "http" },
+          "http": { "method": "PATCH", "url": "https://api.trykintsugi.com/v1/registrations/{id}", "body": { "type": "json", "data": "{}" } },
+          "docs": "Update a registration."
+        },
+        {
+          "info": { "name": "Deregister a registration.", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.trykintsugi.com/v1/registrations/{id}/deregister" },
+          "docs": "Deregister a registration."
+        },
+        {
+          "info": { "name": "Get filings for a registration.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/registrations/{registration_id}/filings" },
+          "docs": "List filings for a registration."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Filings", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List filings.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/filings" },
+          "docs": "List filings with pagination."
+        },
+        {
+          "info": { "name": "Get a filing by ID.", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.trykintsugi.com/v1/filings/{id}" },
+          "docs": "Retrieve a filing by ID."
+        }
+      ]
+    }
+  ]
+}

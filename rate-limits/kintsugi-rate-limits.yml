@@ -1,0 +1,51 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Kintsugi
+providerId: kintsugi
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Sales Tax
+- Tax Compliance
+- Tax Automation
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Kintsugi's REST API is authenticated per organization with an API key in the
+  x-api-key header and the x-organization-id header. Specific published
+  per-endpoint request-rate limits are not documented in the public reference;
+  clients are expected to paginate list endpoints and handle standard HTTP
+  throttling responses. Specific numeric limits are not reconciled in this
+  artifact.
+notes: >-
+  Confirm any documented requests-per-minute or burst limits, throttling
+  response codes, and retry guidance with Kintsugi support during
+  reconciliation. List endpoints use page and size query parameters for
+  pagination.
+sources:
+- https://docs.trykintsugi.com/docs/making-authenticate-request-using-api-key
+- https://docs.trykintsugi.com/docs/error-handling
+responseCodes:
+  throttled: 429
+limits:
+- name: Requests Per Minute
+  scope: organization
+  metric: requests
+  limit: see provider documentation
+  notes: Per-organization request rate; specific value not published.
+- name: Pagination Size
+  scope: request
+  metric: items
+  limit: see provider documentation
+  notes: List endpoints accept page and size query parameters; default and max page size not published.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on 429 responses and honor any Retry-After header.
+- name: Pagination
+  description: Use page and size query parameters on list endpoints to bound response sizes and avoid large unbounded requests.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

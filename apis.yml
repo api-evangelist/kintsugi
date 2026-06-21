@@ -1,0 +1,196 @@
+aid: kintsugi
+url: https://raw.githubusercontent.com/api-evangelist/kintsugi/refs/heads/main/apis.yml
+name: Kintsugi
+kind: company
+description: Kintsugi is an AI-driven sales tax compliance and automation platform that
+  calculates US sales tax, VAT, and GST in real time, monitors economic and physical
+  nexus, manages exemptions and registrations, and auto-prepares and files returns.
+  Its REST API exposes tax estimation, transactions, products, address validation,
+  nexus, exemptions, registrations, and filings, authenticated with an API key plus
+  organization ID header.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Sales Tax
+- Tax Compliance
+- Tax Automation
+- VAT
+- GST
+- Nexus
+- AI
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: kintsugi:tax-calculations
+  name: Kintsugi Tax Calculations API
+  tags:
+  - Tax Calculation
+  - Tax Estimate
+  - Sales Tax
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations
+    type: Documentation
+  - url: https://docs.trykintsugi.com/reference/api/tax-estimation/estimate-tax
+    type: APIReference
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  - url: collections/kintsugi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kintsugi.opencollection.json
+    type: OpenCollection
+  description: Calculates sales tax, VAT, and GST for a transaction before payment
+    via POST /tax/estimate, returning jurisdiction-level tax breakdown, taxable amount,
+    effective rate, and active-registration status without persisting a record.
+- aid: kintsugi:transactions
+  name: Kintsugi Transactions API
+  tags:
+  - Transactions
+  - Credit Notes
+  - Filings
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/docs/api-guides/syncing-transaction-records
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/docs/api-guides/syncing-transaction-records
+    type: Documentation
+  - url: https://docs.trykintsugi.com/reference/api/transactions/create-transaction
+    type: APIReference
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  - url: collections/kintsugi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kintsugi.opencollection.json
+    type: OpenCollection
+  description: Creates, retrieves, and updates committed sales transactions and credit
+    notes, with lookup by Kintsugi ID, external ID, customer, or filing, to drive
+    accurate liability and return preparation.
+- aid: kintsugi:products
+  name: Kintsugi Products and Tax Codes API
+  tags:
+  - Products
+  - Tax Codes
+  - Product Categories
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/docs/api-guides/product-customer-records
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/docs/api-guides/product-customer-records
+    type: Documentation
+  - url: https://docs.trykintsugi.com/reference/api/products/create-product
+    type: APIReference
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  - url: collections/kintsugi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kintsugi.opencollection.json
+    type: OpenCollection
+  description: Manages product records and their taxability classification, including
+    listing product categories used to map catalog items to the correct tax treatment
+    across jurisdictions.
+- aid: kintsugi:addresses-nexus
+  name: Kintsugi Addresses and Nexus API
+  tags:
+  - Address Validation
+  - Nexus
+  - Registrations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/reference/api/address-validation/search
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/reference/api/address-validation/search
+    type: Documentation
+  - url: https://docs.trykintsugi.com/reference/api/nexus/get-nexus-for-org
+    type: APIReference
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  - url: collections/kintsugi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kintsugi.opencollection.json
+    type: OpenCollection
+  description: Validates and suggests addresses for accurate jurisdiction assignment,
+    and manages physical nexus and state registrations so liability tracking reflects
+    where the business is obligated to collect tax.
+- aid: kintsugi:exemptions
+  name: Kintsugi Exemptions API
+  tags:
+  - Exemptions
+  - Certificates
+  - Compliance
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/reference/api/exemptions/get-exemptions
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/reference/api/exemptions/get-exemptions
+    type: Documentation
+  - url: https://docs.trykintsugi.com/reference/api/exemptions/create-exemption
+    type: APIReference
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  - url: collections/kintsugi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kintsugi.opencollection.json
+    type: OpenCollection
+  description: Creates and lists customer tax exemptions and uploads or retrieves
+    exemption certificate attachments, so exempt sales are excluded from calculated
+    liability with documentation on file.
+- aid: kintsugi:filings
+  name: Kintsugi Filings API
+  tags:
+  - Filings
+  - Returns
+  - Registrations
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/reference/api/filings/get-filings
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/reference/api/filings/get-filings
+    type: Documentation
+  - url: https://docs.trykintsugi.com/reference/api/filings/get-filing-by-id
+    type: APIReference
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  - url: collections/kintsugi.postman_collection.json
+    type: PostmanCollection
+  - url: collections/kintsugi.opencollection.json
+    type: OpenCollection
+  description: Retrieves prepared and submitted sales tax returns, including filings
+    by ID and by registration, giving programmatic visibility into the automated
+    filing lifecycle Kintsugi runs on the customer's behalf.
+- aid: kintsugi:webhooks
+  name: Kintsugi Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api
+  baseURL: https://api.trykintsugi.com/v1
+  properties:
+  - url: https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api
+    type: Documentation
+  - url: openapi/kintsugi-openapi.yml
+    type: OpenAPI
+  description: Event notifications that let integrations react to changes such as
+    nexus thresholds being approached, registrations completing, and filings being
+    prepared or submitted, keeping external systems in sync with compliance state.
+common:
+- type: GitHubOrganization
+  url: https://github.com/kintsugi-tax
+- type: LinkedIn
+  url: https://www.linkedin.com/company/trykintsugi
+- type: Website
+  url: https://www.trykintsugi.com
+- type: Documentation
+  url: https://docs.trykintsugi.com
+- type: Plans
+  url: plans/kintsugi-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/kintsugi-rate-limits.yml
+- type: FinOps
+  url: finops/kintsugi-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
