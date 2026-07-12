@@ -177,6 +177,10 @@ apis:
     nexus thresholds being approached, registrations completing, and filings being
     prepared or submitted, keeping external systems in sync with compliance state.
 common:
+- type: DomainSecurity
+  url: security/kintsugi-domain-security.yml
+- type: Authentication
+  url: authentication/kintsugi-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/kintsugi-tax
 - type: LinkedIn

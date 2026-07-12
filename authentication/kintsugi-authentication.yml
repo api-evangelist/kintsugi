@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/kintsugi-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: API key generated in the Kintsugi dashboard.
+  sources:
+  - openapi/kintsugi-openapi.yml
+- name: OrganizationId
+  type: apiKey
+  in: header
+  parameter: x-organization-id
+  description: Identifier of the organization the request acts on behalf of.
+  sources:
+  - openapi/kintsugi-openapi.yml
