@@ -1,0 +1,346 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation Transactions API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Transactions
+  description: Committed sales transactions and credit notes.
+paths:
+  /transactions:
+    post:
+      operationId: createTransaction
+      tags:
+      - Transactions
+      summary: Create a transaction.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '201':
+          description: Transaction created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+    get:
+      operationId: getTransactions
+      tags:
+      - Transactions
+      summary: List transactions.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of transactions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /transactions/{id}:
+    get:
+      operationId: getTransactionById
+      tags:
+      - Transactions
+      summary: Get a transaction by ID.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTransaction
+      tags:
+      - Transactions
+      summary: Update a transaction.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        '200':
+          description: Transaction updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /transactions/external/{external_id}:
+    get:
+      operationId: getTransactionByExternalId
+      tags:
+      - Transactions
+      summary: Get a transaction by external ID.
+      parameters:
+      - $ref: '#/components/parameters/ExternalId'
+      responses:
+        '200':
+          description: The requested transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /transactions/{id}/credit-notes:
+    post:
+      operationId: createCreditNoteByTransactionId
+      tags:
+      - Transactions
+      summary: Create a credit note for a transaction.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteRequest'
+      responses:
+        '201':
+          description: Credit note created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+    patch:
+      operationId: updateCreditNoteByTransactionId
+      tags:
+      - Transactions
+      summary: Update a credit note for a transaction.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteRequest'
+      responses:
+        '200':
+          description: Credit note updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+components:
+  schemas:
+    TransactionItemEstimate:
+      type: object
+      properties:
+        external_id:
+          type: string
+        external_product_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
+          type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - date
+    Address:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - SHIP_TO
+          - BILL_TO
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        full_address:
+          type: string
+      required:
+      - postal_code
+      - country
+    CreditNoteRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        reason:
+          type: string
+    Transaction:
+      allOf:
+      - $ref: '#/components/schemas/TransactionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+          total_tax_amount_calculated:
+            type: string
+          taxable_amount:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    TransactionRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        status:
+          type: string
+        external_customer_id:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
+      required:
+      - external_id
+      - date
+      - currency
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+  responses:
+    ValidationError:
+      description: Request validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key or organization ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    ExternalId:
+      name: external_id
+      in: path
+      required: true
+      schema:
+        type: string
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.

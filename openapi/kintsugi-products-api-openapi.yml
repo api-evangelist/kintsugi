@@ -1,0 +1,201 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation Products API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Products
+  description: Product records and taxability classification.
+paths:
+  /products:
+    post:
+      operationId: createProduct
+      tags:
+      - Products
+      summary: Create a product.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '201':
+          description: Product created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    get:
+      operationId: getProducts
+      tags:
+      - Products
+      summary: List products.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of products.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductPage'
+  /products/{id}:
+    get:
+      operationId: getProductById
+      tags:
+      - Products
+      summary: Get a product by ID.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateProduct
+      tags:
+      - Products
+      summary: Update a product.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductRequest'
+      responses:
+        '200':
+          description: Product updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /products/categories:
+    get:
+      operationId: getProductCategories
+      tags:
+      - Products
+      summary: List product categories.
+      responses:
+        '200':
+          description: Available product categories used for taxability mapping.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductCategory'
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    ProductCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+        description:
+          type: string
+    ProductPage:
+      $ref: '#/components/schemas/Page'
+    ProductRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    Product:
+      allOf:
+      - $ref: '#/components/schemas/ProductRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.

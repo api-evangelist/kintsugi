@@ -1,0 +1,219 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation Exemptions API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Exemptions
+  description: Customer tax exemptions and certificates.
+paths:
+  /exemptions:
+    post:
+      operationId: createExemption
+      tags:
+      - Exemptions
+      summary: Create an exemption.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExemptionRequest'
+      responses:
+        '201':
+          description: Exemption created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exemption'
+    get:
+      operationId: getExemptions
+      tags:
+      - Exemptions
+      summary: List exemptions.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of exemptions.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExemptionPage'
+  /exemptions/{id}:
+    get:
+      operationId: getExemptionById
+      tags:
+      - Exemptions
+      summary: Get an exemption by ID.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested exemption.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exemption'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /exemptions/{id}/certificates:
+    post:
+      operationId: uploadExemptionCertificate
+      tags:
+      - Exemptions
+      summary: Upload an exemption certificate.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Certificate uploaded.
+  /exemptions/{id}/attachments:
+    get:
+      operationId: getAttachmentsForExemption
+      tags:
+      - Exemptions
+      summary: Get attachments for an exemption.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Exemption attachments.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Attachment'
+components:
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    ExemptionPage:
+      $ref: '#/components/schemas/Page'
+    Attachment:
+      type: object
+      properties:
+        id:
+          type: string
+        filename:
+          type: string
+        url:
+          type: string
+        content_type:
+          type: string
+    Exemption:
+      type: object
+      properties:
+        id:
+          type: string
+        external_customer_id:
+          type: string
+        state:
+          type: string
+        exemption_type:
+          type: string
+        status:
+          type: string
+        valid_from:
+          type: string
+          format: date
+        valid_to:
+          type: string
+          format: date
+    ExemptionRequest:
+      type: object
+      properties:
+        external_customer_id:
+          type: string
+        state:
+          type: string
+        exemption_type:
+          type: string
+        valid_from:
+          type: string
+          format: date
+        valid_to:
+          type: string
+          format: date
+      required:
+      - external_customer_id
+      - state
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.

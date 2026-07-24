@@ -1,0 +1,168 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation Registrations API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Registrations
+  description: State tax registrations.
+paths:
+  /registrations:
+    post:
+      operationId: createRegistration
+      tags:
+      - Registrations
+      summary: Create a registration.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '201':
+          description: Registration created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+    get:
+      operationId: getRegistrations
+      tags:
+      - Registrations
+      summary: List registrations.
+      responses:
+        '200':
+          description: Registrations for the organization.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registration'
+  /registrations/{id}:
+    get:
+      operationId: getRegistrationById
+      tags:
+      - Registrations
+      summary: Get a registration by ID.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested registration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateRegistration
+      tags:
+      - Registrations
+      summary: Update a registration.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: Registration updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+  /registrations/{id}/deregister:
+    post:
+      operationId: deregisterRegistration
+      tags:
+      - Registrations
+      summary: Deregister a registration.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: Registration deregistered.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Registration'
+components:
+  schemas:
+    Registration:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        registration_number:
+          type: string
+        status:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        filing_frequency:
+          type: string
+    RegistrationRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        effective_date:
+          type: string
+          format: date
+      required:
+      - state
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.

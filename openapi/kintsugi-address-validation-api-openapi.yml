@@ -1,0 +1,113 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Address Validation
+  description: Address search and suggestions for jurisdiction assignment.
+paths:
+  /addresses/search:
+    get:
+      operationId: searchAddress
+      tags:
+      - Address Validation
+      summary: Validate and search an address.
+      parameters:
+      - name: street_1
+        in: query
+        schema:
+          type: string
+      - name: city
+        in: query
+        schema:
+          type: string
+      - name: state
+        in: query
+        schema:
+          type: string
+      - name: postal_code
+        in: query
+        schema:
+          type: string
+      - name: country
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The validated address.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+  /addresses/suggestions:
+    get:
+      operationId: getAddressSuggestions
+      tags:
+      - Address Validation
+      summary: Get address suggestions.
+      parameters:
+      - name: query
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Suggested addresses.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - SHIP_TO
+          - BILL_TO
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        full_address:
+          type: string
+      required:
+      - postal_code
+      - country
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.

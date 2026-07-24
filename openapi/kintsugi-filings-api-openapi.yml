@@ -1,0 +1,180 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation Filings API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Filings
+  description: Prepared and submitted sales tax returns.
+paths:
+  /filings:
+    get:
+      operationId: getFilings
+      tags:
+      - Filings
+      summary: List filings.
+      parameters:
+      - $ref: '#/components/parameters/Page'
+      - $ref: '#/components/parameters/Size'
+      responses:
+        '200':
+          description: A page of filings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilingPage'
+  /filings/{id}:
+    get:
+      operationId: getFilingById
+      tags:
+      - Filings
+      summary: Get a filing by ID.
+      parameters:
+      - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested filing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Filing'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /filings/{filing_id}/transactions:
+    get:
+      operationId: getTransactionsByFilingId
+      tags:
+      - Filings
+      summary: Get transactions for a filing.
+      parameters:
+      - name: filing_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Transactions included in the filing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPage'
+  /registrations/{registration_id}/filings:
+    get:
+      operationId: getFilingsByRegistrationId
+      tags:
+      - Filings
+      summary: Get filings for a registration.
+      parameters:
+      - name: registration_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Filings for the registration.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilingPage'
+components:
+  schemas:
+    Filing:
+      type: object
+      properties:
+        id:
+          type: string
+        registration_id:
+          type: string
+        state:
+          type: string
+        period_start:
+          type: string
+          format: date
+        period_end:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        status:
+          type: string
+        total_tax_due:
+          type: string
+        filed_at:
+          type: string
+          format: date-time
+    FilingPage:
+      $ref: '#/components/schemas/Page'
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.

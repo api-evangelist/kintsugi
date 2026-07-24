@@ -1,0 +1,229 @@
+openapi: 3.0.1
+info:
+  title: Kintsugi Tax Address Validation Tax Estimation API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  termsOfService: https://www.trykintsugi.com/terms-of-service
+  contact:
+    name: Kintsugi Support
+    url: https://www.trykintsugi.com/support
+  version: '1.0'
+servers:
+- url: https://api.trykintsugi.com/v1
+  description: Kintsugi production API base URL
+security:
+- ApiKeyAuth: []
+  OrganizationId: []
+tags:
+- name: Tax Estimation
+  description: Real-time sales tax, VAT, and GST estimation.
+paths:
+  /tax/estimate:
+    post:
+      operationId: estimateTax
+      tags:
+      - Tax Estimation
+      summary: Estimate tax for a transaction.
+      description: Calculates sales tax, VAT, or GST for a prospective transaction before payment is collected. Returns a jurisdiction-level breakdown, the taxable amount, the effective tax rate, and whether an active registration exists, without persisting a transaction record.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionEstimateRequest'
+      responses:
+        '200':
+          description: Tax estimate calculated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEstimateResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  schemas:
+    TransactionEstimateRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+          example: USD
+        description:
+          type: string
+        marketplace:
+          type: boolean
+          default: false
+        customer:
+          $ref: '#/components/schemas/CustomerRequest'
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
+      required:
+      - external_id
+      - date
+      - currency
+      - addresses
+      - transaction_items
+    TransactionItemEstimate:
+      type: object
+      properties:
+        external_id:
+          type: string
+        external_product_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
+          type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - date
+    Address:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - SHIP_TO
+          - BILL_TO
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        full_address:
+          type: string
+      required:
+      - postal_code
+      - country
+    TransactionEstimateResponse:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        total_tax_amount_calculated:
+          type: string
+        taxable_amount:
+          type: string
+        tax_rate_calculated:
+          type: string
+        has_active_registration:
+          type: boolean
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimateResponse'
+    CustomerRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+    TransactionItemEstimateResponse:
+      allOf:
+      - $ref: '#/components/schemas/TransactionItemEstimate'
+      - type: object
+        properties:
+          tax_amount:
+            type: string
+          taxable_amount:
+            type: string
+          tax_rate:
+            type: string
+          exempt_reason:
+            type: string
+          tax_items:
+            type: array
+            items:
+              $ref: '#/components/schemas/TaxItemEstimate'
+    TaxItemEstimate:
+      type: object
+      properties:
+        jurisdiction:
+          type: string
+        jurisdiction_type:
+          type: string
+        tax_rate:
+          type: string
+        tax_amount:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+  responses:
+    ValidationError:
+      description: Request validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key or organization ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: API key generated in the Kintsugi dashboard.
+    OrganizationId:
+      type: apiKey
+      in: header
+      name: x-organization-id
+      description: Identifier of the organization the request acts on behalf of.
