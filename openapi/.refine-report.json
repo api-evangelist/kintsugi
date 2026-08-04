@@ -1,0 +1,30 @@
+{
+  "provider": "kintsugi",
+  "sources": [
+    "kintsugi-address-validation-api-openapi.yml",
+    "kintsugi-customers-api-openapi.yml",
+    "kintsugi-exemptions-api-openapi.yml",
+    "kintsugi-filings-api-openapi.yml",
+    "kintsugi-nexus-api-openapi.yml",
+    "kintsugi-products-api-openapi.yml",
+    "kintsugi-registrations-api-openapi.yml",
+    "kintsugi-tax-estimation-api-openapi.yml",
+    "kintsugi-transactions-api-openapi.yml"
+  ],
+  "outputs": [
+    "kintsugi-address-validation-api-openapi.yml",
+    "kintsugi-customers-api-openapi.yml",
+    "kintsugi-exemptions-api-openapi.yml",
+    "kintsugi-filings-api-openapi.yml",
+    "kintsugi-nexus-api-openapi.yml",
+    "kintsugi-products-api-openapi.yml",
+    "kintsugi-registrations-api-openapi.yml",
+    "kintsugi-tax-estimation-api-openapi.yml",
+    "kintsugi-transactions-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
