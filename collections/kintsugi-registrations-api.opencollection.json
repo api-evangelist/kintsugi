@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax Address Validation Registrations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Registrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List registrations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/registrations"
+          },
+          "docs": "List registrations."
+        },
+        {
+          "info": {
+            "name": "Create a registration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/registrations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a registration."
+        },
+        {
+          "info": {
+            "name": "Get a registration by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/registrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a registration by ID."
+        },
+        {
+          "info": {
+            "name": "Update a registration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.trykintsugi.com/v1/registrations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a registration."
+        },
+        {
+          "info": {
+            "name": "Deregister a registration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/registrations/:id/deregister",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deregister a registration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

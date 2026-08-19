@@ -1,0 +1,261 @@
+{
+  "item": [
+    {
+      "id": "7eafa22b-a024-4d2c-9cf7-307b9464bc57",
+      "name": "Address Validation",
+      "description": {
+        "content": "Address search and suggestions for jurisdiction assignment.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3f77cf68-1d1b-4f05-949f-62ca405334ca",
+          "name": "Validate and search an address.",
+          "request": {
+            "name": "Validate and search an address.",
+            "description": {},
+            "url": {
+              "path": [
+                "addresses",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "street_1",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "city",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "postal_code",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3657e837-d671-4b5a-af5c-58f1dc48d348",
+              "name": "The validated address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "street_1",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "postal_code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"postal_code\": \"string\",\n  \"country\": \"string\",\n  \"type\": \"BILL_TO\",\n  \"street_1\": \"string\",\n  \"street_2\": \"string\",\n  \"city\": \"string\",\n  \"county\": \"string\",\n  \"state\": \"string\",\n  \"full_address\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c4b5daac-d5c5-485e-a96c-a622590dec01",
+          "name": "Get address suggestions.",
+          "request": {
+            "name": "Get address suggestions.",
+            "description": {},
+            "url": {
+              "path": [
+                "addresses",
+                "suggestions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61650c53-2394-4927-ad29-37610163ec3c",
+              "name": "Suggested addresses.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "addresses",
+                    "suggestions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"type\": \"BILL_TO\",\n    \"street_1\": \"string\",\n    \"street_2\": \"string\",\n    \"city\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"full_address\": \"string\"\n  },\n  {\n    \"postal_code\": \"string\",\n    \"country\": \"string\",\n    \"type\": \"BILL_TO\",\n    \"street_1\": \"string\",\n    \"street_2\": \"string\",\n    \"city\": \"string\",\n    \"county\": \"string\",\n    \"state\": \"string\",\n    \"full_address\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trykintsugi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8fa0fa47-1ced-402c-af52-36222379969d",
+    "name": "Kintsugi Tax Address Validation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.\n\nContact Support:\n Name: Kintsugi Support",
+      "type": "text/plain"
+    }
+  }
+}

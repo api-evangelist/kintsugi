@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax Address Validation Nexus API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nexus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get nexus status for the organization.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/nexus"
+          },
+          "docs": "Get nexus status for the organization."
+        },
+        {
+          "info": {
+            "name": "List physical nexus entries.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/nexus/physical"
+          },
+          "docs": "List physical nexus entries."
+        },
+        {
+          "info": {
+            "name": "Create a physical nexus.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/nexus/physical",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a physical nexus."
+        },
+        {
+          "info": {
+            "name": "Update a physical nexus.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.trykintsugi.com/v1/nexus/physical/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a physical nexus."
+        },
+        {
+          "info": {
+            "name": "Delete a physical nexus.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.trykintsugi.com/v1/nexus/physical/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a physical nexus."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

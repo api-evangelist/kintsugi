@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax Address Validation Exemptions API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exemptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List exemptions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/exemptions",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List exemptions."
+        },
+        {
+          "info": {
+            "name": "Create an exemption.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/exemptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an exemption."
+        },
+        {
+          "info": {
+            "name": "Get an exemption by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/exemptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an exemption by ID."
+        },
+        {
+          "info": {
+            "name": "Upload an exemption certificate.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/exemptions/:id/certificates",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload an exemption certificate."
+        },
+        {
+          "info": {
+            "name": "Get attachments for an exemption.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/exemptions/:id/attachments",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get attachments for an exemption."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

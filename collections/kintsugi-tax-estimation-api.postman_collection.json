@@ -1,0 +1,254 @@
+{
+  "item": [
+    {
+      "id": "d23547c8-65e7-4d46-92e4-f69a8b5c1b82",
+      "name": "Tax Estimation",
+      "description": {
+        "content": "Real-time sales tax, VAT, and GST estimation.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "407b4506-d565-4fce-9a92-1ced075bb757",
+          "name": "Estimate tax for a transaction.",
+          "request": {
+            "name": "Estimate tax for a transaction.",
+            "description": {
+              "content": "Calculates sales tax, VAT, or GST for a prospective transaction before payment is collected. Returns a jurisdiction-level breakdown, the taxable amount, the effective tax rate, and whether an active registration exists, without persisting a transaction record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tax",
+                "estimate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"description\": \"<string>\",\n  \"marketplace\": false,\n  \"customer\": {\n    \"external_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"addresses\": [\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      },\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0104acec-024d-4f85-b6b6-ecd8826ca26f",
+              "name": "Tax estimate calculated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"USD\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"description\": \"<string>\",\n  \"marketplace\": false,\n  \"customer\": {\n    \"external_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"addresses\": [\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      },\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"string\",\n  \"date\": \"1975-03-12T10:02:29.387Z\",\n  \"currency\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"tax_rate_calculated\": \"string\",\n  \"has_active_registration\": false,\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false,\n      \"tax_amount\": \"string\",\n      \"taxable_amount\": \"string\",\n      \"tax_rate\": \"string\",\n      \"exempt_reason\": \"string\",\n      \"tax_items\": [\n        {\n          \"jurisdiction\": \"string\",\n          \"jurisdiction_type\": \"string\",\n          \"tax_rate\": \"string\",\n          \"tax_amount\": \"string\"\n        },\n        {\n          \"jurisdiction\": \"string\",\n          \"jurisdiction_type\": \"string\",\n          \"tax_rate\": \"string\",\n          \"tax_amount\": \"string\"\n        }\n      ]\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false,\n      \"tax_amount\": \"string\",\n      \"taxable_amount\": \"string\",\n      \"tax_rate\": \"string\",\n      \"exempt_reason\": \"string\",\n      \"tax_items\": [\n        {\n          \"jurisdiction\": \"string\",\n          \"jurisdiction_type\": \"string\",\n          \"tax_rate\": \"string\",\n          \"tax_amount\": \"string\"\n        },\n        {\n          \"jurisdiction\": \"string\",\n          \"jurisdiction_type\": \"string\",\n          \"tax_rate\": \"string\",\n          \"tax_amount\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c29a7fe4-acf3-47e7-8efc-4568d658c105",
+              "name": "Missing or invalid API key or organization ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"USD\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"description\": \"<string>\",\n  \"marketplace\": false,\n  \"customer\": {\n    \"external_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"addresses\": [\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      },\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 3316\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45663a99-361b-47a4-a9d0-460794997933",
+              "name": "Request validation failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tax",
+                    "estimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"USD\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"description\": \"<string>\",\n  \"marketplace\": false,\n  \"customer\": {\n    \"external_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"addresses\": [\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      },\n      {\n        \"postal_code\": \"<string>\",\n        \"country\": \"<string>\",\n        \"type\": \"<string>\",\n        \"street_1\": \"<string>\",\n        \"street_2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"county\": \"<string>\",\n        \"state\": \"<string>\",\n        \"full_address\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 3316\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trykintsugi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1660635f-28dc-419a-853d-7b53b2ed6290",
+    "name": "Kintsugi Tax Address Validation Tax Estimation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.\n\nContact Support:\n Name: Kintsugi Support",
+      "type": "text/plain"
+    }
+  }
+}

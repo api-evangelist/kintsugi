@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax Address Validation Filings API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Filings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List filings.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/filings",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List filings."
+        },
+        {
+          "info": {
+            "name": "Get a filing by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/filings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a filing by ID."
+        },
+        {
+          "info": {
+            "name": "Get transactions for a filing.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/filings/:filing_id/transactions",
+            "params": [
+              {
+                "name": "filing_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get transactions for a filing."
+        },
+        {
+          "info": {
+            "name": "Get filings for a registration.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/registrations/:registration_id/filings",
+            "params": [
+              {
+                "name": "registration_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get filings for a registration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

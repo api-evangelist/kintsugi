@@ -1,0 +1,1093 @@
+{
+  "item": [
+    {
+      "id": "6d6839a9-a690-4b55-b207-c053803e850b",
+      "name": "Transactions",
+      "description": {
+        "content": "Committed sales transactions and credit notes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f27e756-9fcb-4996-b507-308aa1042b5e",
+          "name": "Create a transaction.",
+          "request": {
+            "name": "Create a transaction.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "451700f9-5fe5-4fd8-b162-15ccb73de238",
+              "name": "Transaction created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"created_at\": \"1963-05-20T02:02:30.254Z\",\n  \"updated_at\": \"2009-01-10T16:48:31.831Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e35d7f33-d116-48af-be77-78496be53db7",
+              "name": "Missing or invalid API key or organization ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 4171\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f0f3ba7d-e905-45a3-b57c-192775144e35",
+              "name": "Request validation failed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 4171\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "661b0e9f-1918-4d8a-b93a-640d6ea0d363",
+          "name": "List transactions.",
+          "request": {
+            "name": "List transactions.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9880cb83-1a7c-48c5-90b8-d969c848665c",
+              "name": "A page of transactions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 832,\n  \"page\": 3213,\n  \"size\": 3204,\n  \"pages\": 1655\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84420613-415e-4d9c-8a99-413d8172f65d",
+              "name": "Missing or invalid API key or organization ID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 4171\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c480da75-5ac0-4312-8464-c119c8cb0b9f",
+          "name": "Get a transaction by ID.",
+          "request": {
+            "name": "Get a transaction by ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c30781a-985b-428c-8da3-ca7ae46133b6",
+              "name": "The requested transaction.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"created_at\": \"1963-05-20T02:02:30.254Z\",\n  \"updated_at\": \"2009-01-10T16:48:31.831Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d548bb4-90a1-4581-a4d2-fd93a19c075b",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 4171\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "596b07ef-9bc9-467d-8afb-5bcdcbb7800f",
+          "name": "Update a transaction.",
+          "request": {
+            "name": "Update a transaction.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a3e1ff5-921e-48b2-a499-ebb9c911cff8",
+              "name": "Transaction updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"created_at\": \"1963-05-20T02:02:30.254Z\",\n  \"updated_at\": \"2009-01-10T16:48:31.831Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59f7675d-fba6-48e7-b95a-a9297781e8cb",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 4171\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ba132f2-6a40-45a3-aa27-0deb5a33558e",
+          "name": "Get a transaction by external ID.",
+          "request": {
+            "name": "Get a transaction by external ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                "external",
+                ":external_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "external_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "08f74307-0bad-4dbb-b57d-c318fbc1203f",
+              "name": "The requested transaction.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "external",
+                    ":external_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"created_at\": \"1963-05-20T02:02:30.254Z\",\n  \"updated_at\": \"2009-01-10T16:48:31.831Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b27dd237-a93a-4e72-89d4-fba8e562172d",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    "external",
+                    ":external_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 4171\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0c50eb0-d5a7-497e-a745-87ac52a233f7",
+          "name": "Create a credit note for a transaction.",
+          "request": {
+            "name": "Create a credit note for a transaction.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "credit-notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"amount\": \"<number>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b99a6dd7-27aa-4c40-a6bb-9ca62b8a65cc",
+              "name": "Credit note created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "credit-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"amount\": \"<number>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"created_at\": \"1963-05-20T02:02:30.254Z\",\n  \"updated_at\": \"2009-01-10T16:48:31.831Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a4f08e1-2b62-432a-8fbb-024dd60d69c5",
+          "name": "Update a credit note for a transaction.",
+          "request": {
+            "name": "Update a credit note for a transaction.",
+            "description": {},
+            "url": {
+              "path": [
+                "transactions",
+                ":id",
+                "credit-notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"amount\": \"<number>\",\n  \"reason\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "692e091f-b32c-4e2c-aae5-042191ea84be",
+              "name": "Credit note updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id",
+                    "credit-notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"amount\": \"<number>\",\n  \"reason\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"date\": \"<dateTime>\",\n  \"currency\": \"<string>\",\n  \"status\": \"<string>\",\n  \"external_customer_id\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"transaction_items\": [\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    },\n    {\n      \"amount\": \"<number>\",\n      \"date\": \"<dateTime>\",\n      \"external_id\": \"<string>\",\n      \"external_product_id\": \"<string>\",\n      \"quantity\": 1,\n      \"product_name\": \"<string>\",\n      \"product_category\": \"<string>\",\n      \"product_subcategory\": \"<string>\",\n      \"exempt\": false\n    }\n  ],\n  \"id\": \"string\",\n  \"total_tax_amount_calculated\": \"string\",\n  \"taxable_amount\": \"string\",\n  \"created_at\": \"1963-05-20T02:02:30.254Z\",\n  \"updated_at\": \"2009-01-10T16:48:31.831Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trykintsugi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bc8239d2-eed3-4dfb-a0f3-fa4759e896cc",
+    "name": "Kintsugi Tax Address Validation Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.\n\nContact Support:\n Name: Kintsugi Support",
+      "type": "text/plain"
+    }
+  }
+}

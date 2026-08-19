@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax Address Validation Tax Estimation API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tax Estimation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Estimate tax for a transaction.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/tax/estimate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculates sales tax, VAT, or GST for a prospective transaction before payment is collected. Returns a jurisdiction-level breakdown, the taxable amount, the effective tax rate, and whether an active registration exists, without persisting a transaction record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

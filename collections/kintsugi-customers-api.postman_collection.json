@@ -1,0 +1,647 @@
+{
+  "item": [
+    {
+      "id": "2252ccda-8936-45da-be79-0851a126941a",
+      "name": "Customers",
+      "description": {
+        "content": "Customer records and their transactions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2723fab-6052-4598-bbe9-26d682d3c0c2",
+          "name": "Create a customer.",
+          "request": {
+            "name": "Create a customer.",
+            "description": {},
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7bbfec2-d108-47ff-805e-2b0fb3837415",
+              "name": "Customer created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"id\": \"string\",\n  \"created_at\": \"1970-03-12T07:50:20.155Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec450d58-3d9b-4437-b607-535770f13891",
+          "name": "List customers.",
+          "request": {
+            "name": "List customers.",
+            "description": {},
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "size",
+                  "value": "50"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c0445af-db63-471e-b2d3-c9621ba255f6",
+              "name": "A page of customers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 6870,\n  \"page\": 5825,\n  \"size\": 365,\n  \"pages\": 3117\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4744d893-4c24-40f5-9969-179b5ea08f96",
+          "name": "Get a customer by ID.",
+          "request": {
+            "name": "Get a customer by ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "customers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "031407e9-2ae9-4c14-a87c-1dd00ec79831",
+              "name": "The requested customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"id\": \"string\",\n  \"created_at\": \"1970-03-12T07:50:20.155Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec3fc899-59cd-4af2-9841-43c589366fc0",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 7704\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "521b5959-f464-45c5-9663-43ba29e4bf94",
+          "name": "Update a customer.",
+          "request": {
+            "name": "Update a customer.",
+            "description": {},
+            "url": {
+              "path": [
+                "customers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99183bd0-40f6-48f6-b9ec-14c255f28429",
+              "name": "Customer updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"id\": \"string\",\n  \"created_at\": \"1970-03-12T07:50:20.155Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f9fa6d2-6d3e-4027-9520-16310544e8c8",
+          "name": "Get a customer by external ID.",
+          "request": {
+            "name": "Get a customer by external ID.",
+            "description": {},
+            "url": {
+              "path": [
+                "customers",
+                "external",
+                ":external_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "external_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "013ef4b6-e951-45ab-8da9-6d46c33fefbd",
+              "name": "The requested customer.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    "external",
+                    ":external_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"external_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"addresses\": [\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    },\n    {\n      \"postal_code\": \"<string>\",\n      \"country\": \"<string>\",\n      \"type\": \"<string>\",\n      \"street_1\": \"<string>\",\n      \"street_2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"county\": \"<string>\",\n      \"state\": \"<string>\",\n      \"full_address\": \"<string>\"\n    }\n  ],\n  \"id\": \"string\",\n  \"created_at\": \"1970-03-12T07:50:20.155Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b213074-4128-492d-a514-10377b4b5c59",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    "external",
+                    ":external_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "external_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"string\",\n  \"status_code\": 7704\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trykintsugi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a46e158f-345a-4d65-a8eb-b9d74f297370",
+    "name": "Kintsugi Tax Address Validation Customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.\n\nContact Support:\n Name: Kintsugi Support",
+      "type": "text/plain"
+    }
+  }
+}

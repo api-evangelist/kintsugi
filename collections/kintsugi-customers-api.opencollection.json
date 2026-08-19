@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kintsugi Tax Address Validation Customers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "x-api-key",
+      "value": "{{x-api-key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List customers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/customers",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List customers."
+        },
+        {
+          "info": {
+            "name": "Create a customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.trykintsugi.com/v1/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a customer."
+        },
+        {
+          "info": {
+            "name": "Get a customer by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a customer by ID."
+        },
+        {
+          "info": {
+            "name": "Update a customer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.trykintsugi.com/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a customer."
+        },
+        {
+          "info": {
+            "name": "Get a customer by external ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.trykintsugi.com/v1/customers/external/:external_id",
+            "params": [
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a customer by external ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

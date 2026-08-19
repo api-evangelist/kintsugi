@@ -1,0 +1,500 @@
+{
+  "item": [
+    {
+      "id": "8594960b-e1fb-4567-939e-da036b861f91",
+      "name": "Nexus",
+      "description": {
+        "content": "Physical and economic nexus tracking.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "da38f215-7582-4cf0-a33b-6d351ea176c1",
+          "name": "Get nexus status for the organization.",
+          "request": {
+            "name": "Get nexus status for the organization.",
+            "description": {},
+            "url": {
+              "path": [
+                "nexus"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c839a404-3b86-4ea1-8ff7-5dd1c574457f",
+              "name": "Nexus status across jurisdictions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nexus"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"nexus_type\": \"PHYSICAL\",\n    \"status\": \"string\",\n    \"registration_id\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"nexus_type\": \"ECONOMIC\",\n    \"status\": \"string\",\n    \"registration_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c906b0b9-4f8d-4ae0-86b9-72f7d4156a88",
+          "name": "Create a physical nexus.",
+          "request": {
+            "name": "Create a physical nexus.",
+            "description": {},
+            "url": {
+              "path": [
+                "nexus",
+                "physical"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8af1719a-9d3e-4301-a85b-6c94ce89e13c",
+              "name": "Physical nexus created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nexus",
+                    "physical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"state\": \"string\",\n  \"country\": \"string\",\n  \"nexus_type\": \"PHYSICAL\",\n  \"status\": \"string\",\n  \"registration_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1168a28d-a222-45bb-b743-0a73a69c2996",
+          "name": "List physical nexus entries.",
+          "request": {
+            "name": "List physical nexus entries.",
+            "description": {},
+            "url": {
+              "path": [
+                "nexus",
+                "physical"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70c2b077-a4d0-4366-b327-eea39ec1495a",
+              "name": "Physical nexus entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nexus",
+                    "physical"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"nexus_type\": \"PHYSICAL\",\n    \"status\": \"string\",\n    \"registration_id\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"nexus_type\": \"ECONOMIC\",\n    \"status\": \"string\",\n    \"registration_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38bbbba2-8607-4e0e-9139-c4e5c414a6bf",
+          "name": "Update a physical nexus.",
+          "request": {
+            "name": "Update a physical nexus.",
+            "description": {},
+            "url": {
+              "path": [
+                "nexus",
+                "physical",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "df82689d-5ccf-4a79-906a-8b0f8c62f3c7",
+              "name": "Physical nexus updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nexus",
+                    "physical",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"state\": \"<string>\",\n  \"country\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"state\": \"string\",\n  \"country\": \"string\",\n  \"nexus_type\": \"PHYSICAL\",\n  \"status\": \"string\",\n  \"registration_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1ca0dee-1c12-458c-90d5-4bd2fb92bc98",
+          "name": "Delete a physical nexus.",
+          "request": {
+            "name": "Delete a physical nexus.",
+            "description": {},
+            "url": {
+              "path": [
+                "nexus",
+                "physical",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a970e9ba-047b-448b-ba66-8ca6233ee431",
+              "name": "Physical nexus deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "nexus",
+                    "physical",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "x-api-key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.trykintsugi.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2e76095f-dd3f-4c3b-ab76-638679793e15",
+    "name": "Kintsugi Tax Address Validation Nexus API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.\n\nContact Support:\n Name: Kintsugi Support",
+      "type": "text/plain"
+    }
+  }
+}
