@@ -29,6 +29,14 @@ tags:
 - VAT
 - GST
 - Nexus
+- Artificial Intelligence
+tags_raw:
+- Sales Tax
+- Tax Compliance
+- Tax Automation
+- VAT
+- GST
+- Nexus
 - AI
 created: '2026-06-21'
 modified: '2026-06-21'
@@ -240,6 +248,8 @@ apis:
   humanURL: https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations
   baseURL: https://api.trykintsugi.com/v1
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -360,6 +370,8 @@ apis:
   humanURL: https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations
   baseURL: https://api.trykintsugi.com/v1
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
