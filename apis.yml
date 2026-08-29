@@ -8,6 +8,18 @@ description: Kintsugi is an AI-driven sales tax compliance and automation platfo
   Its REST API exposes tax estimation, transactions, products, address validation,
   nexus, exemptions, registrations, and filings, authenticated with an API key plus
   organization ID header.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
