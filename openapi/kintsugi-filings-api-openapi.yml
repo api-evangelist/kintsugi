@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kintsugi Tax Address Validation Filings API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  title: Kintsugi Tax Filings API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: getFilings
       tags:
       - Filings
-      summary: List filings.
+      summary: List filings
       parameters:
       - $ref: '#/components/parameters/Page'
       - $ref: '#/components/parameters/Size'
@@ -38,7 +38,7 @@ paths:
       operationId: getFilingById
       tags:
       - Filings
-      summary: Get a filing by ID.
+      summary: Get a filing by ID
       parameters:
       - $ref: '#/components/parameters/Id'
       responses:
@@ -55,7 +55,7 @@ paths:
       operationId: getTransactionsByFilingId
       tags:
       - Filings
-      summary: Get transactions for a filing.
+      summary: Get transactions for a filing
       parameters:
       - name: filing_id
         in: path
@@ -74,7 +74,7 @@ paths:
       operationId: getFilingsByRegistrationId
       tags:
       - Filings
-      summary: Get filings for a registration.
+      summary: Get filings for a registration
       parameters:
       - name: registration_id
         in: path
@@ -90,6 +90,32 @@ paths:
                 $ref: '#/components/schemas/FilingPage'
 components:
   schemas:
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    FilingPage:
+      $ref: '#/components/schemas/Page'
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
     Filing:
       type: object
       properties:
@@ -115,39 +141,7 @@ components:
         filed_at:
           type: string
           format: date-time
-    FilingPage:
-      $ref: '#/components/schemas/Page'
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
-    Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
   parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
     Size:
       name: size
       in: query
@@ -160,6 +154,12 @@ components:
       required: true
       schema:
         type: string
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   responses:
     NotFound:
       description: Resource not found.

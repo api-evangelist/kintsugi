@@ -1,15 +1,7 @@
 {
   "provider": "kintsugi",
   "sources": [
-    "kintsugi-address-validation-api-openapi.yml",
-    "kintsugi-customers-api-openapi.yml",
-    "kintsugi-exemptions-api-openapi.yml",
-    "kintsugi-filings-api-openapi.yml",
-    "kintsugi-nexus-api-openapi.yml",
-    "kintsugi-products-api-openapi.yml",
-    "kintsugi-registrations-api-openapi.yml",
-    "kintsugi-tax-estimation-api-openapi.yml",
-    "kintsugi-transactions-api-openapi.yml"
+    "_original/kintsugi-openapi.yml"
   ],
   "outputs": [
     "kintsugi-address-validation-api-openapi.yml",
@@ -25,6 +17,20 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "kintsugi-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "kintsugi-address-validation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-exemptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-filings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-nexus-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-registrations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-tax-estimation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "kintsugi-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

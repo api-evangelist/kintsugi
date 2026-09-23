@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Kintsugi Tax Address Validation API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: searchAddress
       tags:
       - Address Validation
-      summary: Validate and search an address.
+      summary: Validate and search an address
       parameters:
       - name: street_1
         in: query
@@ -56,7 +56,7 @@ paths:
       operationId: getAddressSuggestions
       tags:
       - Address Validation
-      summary: Get address suggestions.
+      summary: Get address suggestions
       parameters:
       - name: query
         in: query

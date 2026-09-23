@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kintsugi Tax Address Validation Nexus API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  title: Kintsugi Tax Nexus API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: getNexusForOrg
       tags:
       - Nexus
-      summary: Get nexus status for the organization.
+      summary: Get nexus status for the organization
       responses:
         '200':
           description: Nexus status across jurisdictions.
@@ -37,7 +37,7 @@ paths:
       operationId: createPhysicalNexus
       tags:
       - Nexus
-      summary: Create a physical nexus.
+      summary: Create a physical nexus
       requestBody:
         required: true
         content:
@@ -55,7 +55,7 @@ paths:
       operationId: getPhysicalNexus
       tags:
       - Nexus
-      summary: List physical nexus entries.
+      summary: List physical nexus entries
       responses:
         '200':
           description: Physical nexus entries.
@@ -70,7 +70,7 @@ paths:
       operationId: updatePhysicalNexus
       tags:
       - Nexus
-      summary: Update a physical nexus.
+      summary: Update a physical nexus
       parameters:
       - $ref: '#/components/parameters/Id'
       requestBody:
@@ -90,7 +90,7 @@ paths:
       operationId: deletePhysicalNexus
       tags:
       - Nexus
-      summary: Delete a physical nexus.
+      summary: Delete a physical nexus
       parameters:
       - $ref: '#/components/parameters/Id'
       responses:
@@ -98,21 +98,6 @@ paths:
           description: Physical nexus deleted.
 components:
   schemas:
-    PhysicalNexusRequest:
-      type: object
-      properties:
-        state:
-          type: string
-        country:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-      required:
-      - state
     Nexus:
       type: object
       properties:
@@ -131,6 +116,21 @@ components:
           type: string
         registration_id:
           type: string
+    PhysicalNexusRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+      required:
+      - state
   parameters:
     Id:
       name: id

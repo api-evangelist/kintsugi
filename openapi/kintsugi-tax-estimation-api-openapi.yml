@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kintsugi Tax Address Validation Tax Estimation API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  title: Kintsugi Tax Tax Estimation API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: estimateTax
       tags:
       - Tax Estimation
-      summary: Estimate tax for a transaction.
+      summary: Estimate tax for a transaction
       description: Calculates sales tax, VAT, or GST for a prospective transaction before payment is collected. Returns a jurisdiction-level breakdown, the taxable amount, the effective tax rate, and whether an active registration exists, without persisting a transaction record.
       requestBody:
         required: true
@@ -43,6 +43,43 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    TransactionEstimateResponse:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        total_tax_amount_calculated:
+          type: string
+        taxable_amount:
+          type: string
+        tax_rate_calculated:
+          type: string
+        has_active_registration:
+          type: boolean
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimateResponse'
+    TaxItemEstimate:
+      type: object
+      properties:
+        jurisdiction:
+          type: string
+        jurisdiction_type:
+          type: string
+        tax_rate:
+          type: string
+        tax_amount:
+          type: string
     TransactionEstimateRequest:
       type: object
       properties:
@@ -75,33 +112,19 @@ components:
       - currency
       - addresses
       - transaction_items
-    TransactionItemEstimate:
+    CustomerRequest:
       type: object
       properties:
         external_id:
           type: string
-        external_product_id:
+        name:
           type: string
-        date:
+        email:
           type: string
-          format: date-time
-        amount:
-          type: number
-        quantity:
-          type: number
-          default: 1
-        product_name:
-          type: string
-        product_category:
-          type: string
-        product_subcategory:
-          type: string
-        exempt:
-          type: boolean
-          default: false
-      required:
-      - amount
-      - date
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
     Address:
       type: object
       properties:
@@ -129,45 +152,40 @@ components:
       required:
       - postal_code
       - country
-    TransactionEstimateResponse:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    TransactionItemEstimate:
       type: object
       properties:
         external_id:
+          type: string
+        external_product_id:
           type: string
         date:
           type: string
           format: date-time
-        currency:
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
           type: string
-        total_tax_amount_calculated:
+        product_category:
           type: string
-        taxable_amount:
+        product_subcategory:
           type: string
-        tax_rate_calculated:
-          type: string
-        has_active_registration:
+        exempt:
           type: boolean
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-        transaction_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionItemEstimateResponse'
-    CustomerRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
+          default: false
+      required:
+      - amount
+      - date
     TransactionItemEstimateResponse:
       allOf:
       - $ref: '#/components/schemas/TransactionItemEstimate'
@@ -185,24 +203,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/TaxItemEstimate'
-    TaxItemEstimate:
-      type: object
-      properties:
-        jurisdiction:
-          type: string
-        jurisdiction_type:
-          type: string
-        tax_rate:
-          type: string
-        tax_amount:
-          type: string
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
   responses:
     ValidationError:
       description: Request validation failed.

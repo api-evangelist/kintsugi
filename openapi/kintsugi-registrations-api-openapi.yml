@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kintsugi Tax Address Validation Registrations API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  title: Kintsugi Tax Registrations API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: createRegistration
       tags:
       - Registrations
-      summary: Create a registration.
+      summary: Create a registration
       requestBody:
         required: true
         content:
@@ -40,7 +40,7 @@ paths:
       operationId: getRegistrations
       tags:
       - Registrations
-      summary: List registrations.
+      summary: List registrations
       responses:
         '200':
           description: Registrations for the organization.
@@ -55,7 +55,7 @@ paths:
       operationId: getRegistrationById
       tags:
       - Registrations
-      summary: Get a registration by ID.
+      summary: Get a registration by ID
       parameters:
       - $ref: '#/components/parameters/Id'
       responses:
@@ -71,7 +71,7 @@ paths:
       operationId: updateRegistration
       tags:
       - Registrations
-      summary: Update a registration.
+      summary: Update a registration
       parameters:
       - $ref: '#/components/parameters/Id'
       requestBody:
@@ -92,7 +92,7 @@ paths:
       operationId: deregisterRegistration
       tags:
       - Registrations
-      summary: Deregister a registration.
+      summary: Deregister a registration
       parameters:
       - $ref: '#/components/parameters/Id'
       responses:
@@ -104,6 +104,25 @@ paths:
                 $ref: '#/components/schemas/Registration'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    RegistrationRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        effective_date:
+          type: string
+          format: date
+      required:
+      - state
     Registration:
       type: object
       properties:
@@ -122,32 +141,6 @@ components:
           format: date
         filing_frequency:
           type: string
-    RegistrationRequest:
-      type: object
-      properties:
-        state:
-          type: string
-        country:
-          type: string
-        effective_date:
-          type: string
-          format: date
-      required:
-      - state
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Id:
       name: id
@@ -155,6 +148,13 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

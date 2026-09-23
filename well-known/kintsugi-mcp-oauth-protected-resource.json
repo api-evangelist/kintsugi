@@ -1,0 +1,1 @@
+{"resource":"https://mcp.trykintsugi.com/mcp","authorization_servers":["https://auth.trykintsugi.com/oauth/2.1"],"scopes_supported":["read:user_data"],"bearer_methods_supported":["header"]}

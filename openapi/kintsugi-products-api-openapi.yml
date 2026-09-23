@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kintsugi Tax Address Validation Products API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  title: Kintsugi Tax Products API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: createProduct
       tags:
       - Products
-      summary: Create a product.
+      summary: Create a product
       requestBody:
         required: true
         content:
@@ -40,7 +40,7 @@ paths:
       operationId: getProducts
       tags:
       - Products
-      summary: List products.
+      summary: List products
       parameters:
       - $ref: '#/components/parameters/Page'
       - $ref: '#/components/parameters/Size'
@@ -56,7 +56,7 @@ paths:
       operationId: getProductById
       tags:
       - Products
-      summary: Get a product by ID.
+      summary: Get a product by ID
       parameters:
       - $ref: '#/components/parameters/Id'
       responses:
@@ -72,7 +72,7 @@ paths:
       operationId: updateProduct
       tags:
       - Products
-      summary: Update a product.
+      summary: Update a product
       parameters:
       - $ref: '#/components/parameters/Id'
       requestBody:
@@ -93,7 +93,7 @@ paths:
       operationId: getProductCategories
       tags:
       - Products
-      summary: List product categories.
+      summary: List product categories
       responses:
         '200':
           description: Available product categories used for taxability mapping.
@@ -104,26 +104,25 @@ paths:
                 items:
                   $ref: '#/components/schemas/ProductCategory'
 components:
-  parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
+    Product:
+      allOf:
+      - $ref: '#/components/schemas/ProductRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+    ProductCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+        description:
+          type: string
     Page:
       type: object
       properties:
@@ -139,19 +138,13 @@ components:
           type: integer
         pages:
           type: integer
-    ProductCategory:
+    Error:
       type: object
       properties:
-        category:
+        detail:
           type: string
-        subcategory:
-          type: string
-        tax_code:
-          type: string
-        description:
-          type: string
-    ProductPage:
-      $ref: '#/components/schemas/Page'
+        status_code:
+          type: integer
     ProductRequest:
       type: object
       properties:
@@ -167,20 +160,27 @@ components:
           type: string
         tax_code:
           type: string
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    Product:
-      allOf:
-      - $ref: '#/components/schemas/ProductRequest'
-      - type: object
-        properties:
-          id:
-            type: string
+    ProductPage:
+      $ref: '#/components/schemas/Page'
+  parameters:
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   responses:
     NotFound:
       description: Resource not found.

@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Kintsugi Tax Address Validation Transactions API
-  description: REST API for the Kintsugi AI sales tax compliance and automation platform. Calculate US sales tax, VAT, and GST; sync transactions, products, and customers; validate addresses; manage physical nexus, exemptions, and registrations; and retrieve automated filings. Authentication uses an API key supplied in the x-api-key header together with the x-organization-id header identifying the organization. Endpoints, fields, and schemas in this document reflect Kintsugi's public API reference at docs.trykintsugi.com and are not exhaustive; consult the provider documentation for the authoritative contract.
+  title: Kintsugi Tax Transactions API
+  description: REST API for the Kintsugi AI sales tax compliance and automation platform.
   termsOfService: https://www.trykintsugi.com/terms-of-service
   contact:
     name: Kintsugi Support
@@ -22,7 +22,7 @@ paths:
       operationId: createTransaction
       tags:
       - Transactions
-      summary: Create a transaction.
+      summary: Create a transaction
       requestBody:
         required: true
         content:
@@ -44,7 +44,7 @@ paths:
       operationId: getTransactions
       tags:
       - Transactions
-      summary: List transactions.
+      summary: List transactions
       parameters:
       - $ref: '#/components/parameters/Page'
       - $ref: '#/components/parameters/Size'
@@ -62,7 +62,7 @@ paths:
       operationId: getTransactionById
       tags:
       - Transactions
-      summary: Get a transaction by ID.
+      summary: Get a transaction by ID
       parameters:
       - $ref: '#/components/parameters/Id'
       responses:
@@ -78,7 +78,7 @@ paths:
       operationId: updateTransaction
       tags:
       - Transactions
-      summary: Update a transaction.
+      summary: Update a transaction
       parameters:
       - $ref: '#/components/parameters/Id'
       requestBody:
@@ -101,7 +101,7 @@ paths:
       operationId: getTransactionByExternalId
       tags:
       - Transactions
-      summary: Get a transaction by external ID.
+      summary: Get a transaction by external ID
       parameters:
       - $ref: '#/components/parameters/ExternalId'
       responses:
@@ -118,7 +118,7 @@ paths:
       operationId: createCreditNoteByTransactionId
       tags:
       - Transactions
-      summary: Create a credit note for a transaction.
+      summary: Create a credit note for a transaction
       parameters:
       - $ref: '#/components/parameters/Id'
       requestBody:
@@ -138,7 +138,7 @@ paths:
       operationId: updateCreditNoteByTransactionId
       tags:
       - Transactions
-      summary: Update a credit note for a transaction.
+      summary: Update a credit note for a transaction
       parameters:
       - $ref: '#/components/parameters/Id'
       requestBody:
@@ -156,33 +156,76 @@ paths:
                 $ref: '#/components/schemas/Transaction'
 components:
   schemas:
-    TransactionItemEstimate:
+    Transaction:
+      allOf:
+      - $ref: '#/components/schemas/TransactionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+          total_tax_amount_calculated:
+            type: string
+          taxable_amount:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    CreditNoteRequest:
       type: object
       properties:
         external_id:
-          type: string
-        external_product_id:
           type: string
         date:
           type: string
           format: date-time
         amount:
           type: number
-        quantity:
-          type: number
-          default: 1
-        product_name:
+        reason:
           type: string
-        product_category:
+    TransactionRequest:
+      type: object
+      properties:
+        external_id:
           type: string
-        product_subcategory:
+        date:
           type: string
-        exempt:
-          type: boolean
-          default: false
+          format: date-time
+        currency:
+          type: string
+        status:
+          type: string
+        external_customer_id:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
       required:
-      - amount
+      - external_id
       - date
+      - currency
     Address:
       type: object
       properties:
@@ -210,78 +253,6 @@ components:
       required:
       - postal_code
       - country
-    CreditNoteRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        amount:
-          type: number
-        reason:
-          type: string
-    Transaction:
-      allOf:
-      - $ref: '#/components/schemas/TransactionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-          total_tax_amount_calculated:
-            type: string
-          taxable_amount:
-            type: string
-          created_at:
-            type: string
-            format: date-time
-          updated_at:
-            type: string
-            format: date-time
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
-    Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
-    TransactionRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        currency:
-          type: string
-        status:
-          type: string
-        external_customer_id:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-        transaction_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionItemEstimate'
-      required:
-      - external_id
-      - date
-      - currency
     Error:
       type: object
       properties:
@@ -289,32 +260,36 @@ components:
           type: string
         status_code:
           type: integer
-  responses:
-    ValidationError:
-      description: Request validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API key or organization ID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    TransactionItemEstimate:
+      type: object
+      properties:
+        external_id:
+          type: string
+        external_product_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
+          type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - date
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
   parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
     Size:
       name: size
       in: query
@@ -333,6 +308,31 @@ components:
       required: true
       schema:
         type: string
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+  responses:
+    ValidationError:
+      description: Request validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key or organization ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
