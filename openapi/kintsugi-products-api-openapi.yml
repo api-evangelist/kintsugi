@@ -105,6 +105,28 @@ paths:
                   $ref: '#/components/schemas/ProductCategory'
 components:
   schemas:
+    ProductRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
     Product:
       allOf:
       - $ref: '#/components/schemas/ProductRequest'
@@ -138,43 +160,21 @@ components:
           type: integer
         pages:
           type: integer
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    ProductRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
-        category:
-          type: string
-        subcategory:
-          type: string
-        tax_code:
-          type: string
     ProductPage:
       $ref: '#/components/schemas/Page'
   parameters:
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
     Id:
       name: id
       in: path
       required: true
       schema:
         type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
     Page:
       name: page
       in: query

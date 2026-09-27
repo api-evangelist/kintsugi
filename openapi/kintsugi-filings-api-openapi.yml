@@ -90,32 +90,6 @@ paths:
                 $ref: '#/components/schemas/FilingPage'
 components:
   schemas:
-    Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    FilingPage:
-      $ref: '#/components/schemas/Page'
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
     Filing:
       type: object
       properties:
@@ -141,19 +115,45 @@ components:
         filed_at:
           type: string
           format: date-time
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    FilingPage:
+      $ref: '#/components/schemas/Page'
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
   parameters:
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
     Id:
       name: id
       in: path
       required: true
       schema:
         type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
     Page:
       name: page
       in: query

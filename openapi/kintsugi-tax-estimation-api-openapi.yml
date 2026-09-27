@@ -43,32 +43,26 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
-    TransactionEstimateResponse:
+    CustomerRequest:
       type: object
       properties:
         external_id:
           type: string
-        date:
+        name:
           type: string
-          format: date-time
-        currency:
+        email:
           type: string
-        total_tax_amount_calculated:
-          type: string
-        taxable_amount:
-          type: string
-        tax_rate_calculated:
-          type: string
-        has_active_registration:
-          type: boolean
         addresses:
           type: array
           items:
             $ref: '#/components/schemas/Address'
-        transaction_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionItemEstimateResponse'
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
     TaxItemEstimate:
       type: object
       properties:
@@ -80,6 +74,60 @@ components:
           type: string
         tax_amount:
           type: string
+    TransactionItemEstimate:
+      type: object
+      properties:
+        external_id:
+          type: string
+        external_product_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
+          type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - date
+    Address:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - SHIP_TO
+          - BILL_TO
+        street_1:
+          type: string
+        street_2:
+          type: string
+        city:
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        full_address:
+          type: string
+      required:
+      - postal_code
+      - country
     TransactionEstimateRequest:
       type: object
       properties:
@@ -112,80 +160,32 @@ components:
       - currency
       - addresses
       - transaction_items
-    CustomerRequest:
+    TransactionEstimateResponse:
       type: object
       properties:
         external_id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-    Address:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - SHIP_TO
-          - BILL_TO
-        street_1:
-          type: string
-        street_2:
-          type: string
-        city:
-          type: string
-        county:
-          type: string
-        state:
-          type: string
-        postal_code:
-          type: string
-        country:
-          type: string
-        full_address:
-          type: string
-      required:
-      - postal_code
-      - country
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    TransactionItemEstimate:
-      type: object
-      properties:
-        external_id:
-          type: string
-        external_product_id:
           type: string
         date:
           type: string
           format: date-time
-        amount:
-          type: number
-        quantity:
-          type: number
-          default: 1
-        product_name:
+        currency:
           type: string
-        product_category:
+        total_tax_amount_calculated:
           type: string
-        product_subcategory:
+        taxable_amount:
           type: string
-        exempt:
+        tax_rate_calculated:
+          type: string
+        has_active_registration:
           type: boolean
-          default: false
-      required:
-      - amount
-      - date
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimateResponse'
     TransactionItemEstimateResponse:
       allOf:
       - $ref: '#/components/schemas/TransactionItemEstimate'

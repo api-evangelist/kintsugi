@@ -155,51 +155,68 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
 components:
-  schemas:
-    Transaction:
-      allOf:
-      - $ref: '#/components/schemas/TransactionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-          total_tax_amount_calculated:
-            type: string
-          taxable_amount:
-            type: string
-          created_at:
-            type: string
-            format: date-time
-          updated_at:
-            type: string
-            format: date-time
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
     Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    ExternalId:
+      name: external_id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Error:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
+        detail:
+          type: string
+        status_code:
           type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
-    CreditNoteRequest:
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
+    TransactionItemEstimate:
       type: object
       properties:
         external_id:
+          type: string
+        external_product_id:
           type: string
         date:
           type: string
           format: date-time
         amount:
           type: number
-        reason:
+        quantity:
+          type: number
+          default: 1
+        product_name:
           type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - date
     TransactionRequest:
       type: object
       properties:
@@ -253,67 +270,50 @@ components:
       required:
       - postal_code
       - country
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    TransactionItemEstimate:
+    CreditNoteRequest:
       type: object
       properties:
         external_id:
-          type: string
-        external_product_id:
           type: string
         date:
           type: string
           format: date-time
         amount:
           type: number
-        quantity:
-          type: number
-          default: 1
-        product_name:
+        reason:
           type: string
-        product_category:
-          type: string
-        product_subcategory:
-          type: string
-        exempt:
-          type: boolean
-          default: false
-      required:
-      - amount
-      - date
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
-  parameters:
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
-    ExternalId:
-      name: external_id
-      in: path
-      required: true
-      schema:
-        type: string
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
+    Transaction:
+      allOf:
+      - $ref: '#/components/schemas/TransactionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+          total_tax_amount_calculated:
+            type: string
+          taxable_amount:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
     Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
   responses:
     ValidationError:
       description: Request validation failed.
