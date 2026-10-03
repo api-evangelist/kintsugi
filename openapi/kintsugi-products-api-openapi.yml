@@ -104,7 +104,21 @@ paths:
                 items:
                   $ref: '#/components/schemas/ProductCategory'
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Product:
+      allOf:
+      - $ref: '#/components/schemas/ProductRequest'
+      - type: object
+        properties:
+          id:
+            type: string
     ProductRequest:
       type: object
       properties:
@@ -119,31 +133,6 @@ components:
         subcategory:
           type: string
         tax_code:
-          type: string
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    Product:
-      allOf:
-      - $ref: '#/components/schemas/ProductRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-    ProductCategory:
-      type: object
-      properties:
-        category:
-          type: string
-        subcategory:
-          type: string
-        tax_code:
-          type: string
-        description:
           type: string
     Page:
       type: object
@@ -162,7 +151,31 @@ components:
           type: integer
     ProductPage:
       $ref: '#/components/schemas/Page'
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    ProductCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+        description:
+          type: string
   parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
     Id:
       name: id
       in: path
@@ -175,19 +188,6 @@ components:
       schema:
         type: integer
         default: 50
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

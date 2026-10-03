@@ -97,29 +97,7 @@ paths:
         '204':
           description: Physical nexus deleted.
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    PhysicalNexusRequest:
-      type: object
-      properties:
-        state:
-          type: string
-        country:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-      required:
-      - state
     Nexus:
       type: object
       properties:
@@ -138,6 +116,28 @@ components:
           type: string
         registration_id:
           type: string
+    PhysicalNexusRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+      required:
+      - state
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

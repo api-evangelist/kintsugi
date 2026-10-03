@@ -155,41 +155,50 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
 components:
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    ExternalId:
-      name: external_id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    Error:
+    TransactionRequest:
       type: object
       properties:
-        detail:
+        external_id:
           type: string
-        status_code:
-          type: integer
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        status:
+          type: string
+        external_customer_id:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
+      required:
+      - external_id
+      - date
+      - currency
+    Transaction:
+      allOf:
+      - $ref: '#/components/schemas/TransactionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+          total_tax_amount_calculated:
+            type: string
+          taxable_amount:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
     TransactionItemEstimate:
       type: object
       properties:
@@ -217,32 +226,30 @@ components:
       required:
       - amount
       - date
-    TransactionRequest:
+    Page:
       type: object
       properties:
-        external_id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        currency:
-          type: string
-        status:
-          type: string
-        external_customer_id:
-          type: string
-        addresses:
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/Address'
-        transaction_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionItemEstimate'
-      required:
-      - external_id
-      - date
-      - currency
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
     Address:
       type: object
       properties:
@@ -282,38 +289,6 @@ components:
           type: number
         reason:
           type: string
-    Transaction:
-      allOf:
-      - $ref: '#/components/schemas/TransactionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-          total_tax_amount_calculated:
-            type: string
-          taxable_amount:
-            type: string
-          created_at:
-            type: string
-            format: date-time
-          updated_at:
-            type: string
-            format: date-time
-    Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
   responses:
     ValidationError:
       description: Request validation failed.
@@ -333,6 +308,31 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    ExternalId:
+      name: external_id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
