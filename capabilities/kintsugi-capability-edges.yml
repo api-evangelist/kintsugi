@@ -1,0 +1,61 @@
+slug: kintsugi
+provider: Kintsugi
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Tax Estimation
+  spec_file: kintsugi-tax-estimation-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.92
+  evidence: POST /tax/estimate "Estimate tax for a transaction"; schemas TaxItemEstimate, TransactionEstimateRequest
+  reason: Real-time calculation of US sales tax, VAT and GST on transactions is indirect tax determination.
+- tag: Filings
+  spec_file: kintsugi-filings-api-openapi.yml
+  capability_id: BC-220.40
+  capability_id_l1: BC-220
+  capability_name: Tax Reporting & Compliance
+  confidence: 0.88
+  evidence: GET /filings "List filings"; GET /filings/{filing_id}/transactions; vendor "auto-prepares
+    and files returns"
+  reason: Filing records tied to registrations and transactions represent tax return preparation and submission
+    — tax reporting & compliance.
+- tag: Exemptions
+  spec_file: kintsugi-exemptions-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.85
+  evidence: POST /exemptions/{id}/certificates "Upload an exemption certificate"; schemas Exemption, ExemptionRequest
+  reason: Sales-tax exemption certificate management is squarely indirect tax (sales tax/VAT) administration.
+- tag: Nexus
+  spec_file: kintsugi-nexus-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.8
+  evidence: GET /nexus "Get nexus status for the organization"; POST /nexus/physical "Create a physical
+    nexus"
+  reason: Economic/physical nexus tracking determines where US sales tax obligations arise — an indirect
+    tax management activity.
+- tag: Registrations
+  spec_file: kintsugi-registrations-api-openapi.yml
+  capability_id: BC-220.20
+  capability_id_l1: BC-220
+  capability_name: Indirect Tax Management
+  confidence: 0.8
+  evidence: POST /registrations "Create a registration"; POST /registrations/{id}/deregister "Deregister
+    a registration"; vendor "manages exemptions and registrations"
+  reason: Registering and deregistering the business for sales tax/VAT in jurisdictions is indirect tax
+    administration.

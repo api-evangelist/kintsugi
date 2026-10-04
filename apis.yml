@@ -43,6 +43,7 @@ tags:
 - GST
 - Nexus
 - Artificial Intelligence
+- Tax
 tags_raw:
 - Sales Tax
 - Tax Compliance
@@ -51,6 +52,7 @@ tags_raw:
 - GST
 - Nexus
 - AI
+- Tax
 created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.23'
@@ -420,6 +422,9 @@ apis:
   - type: Documentation
     url: https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api
 common:
+- type: CapabilityMap
+  url: capabilities/kintsugi-capability-edges.yml
+  name: Kintsugi Business Capability Map
 - type: AgenticAccess
   url: agentic-access/kintsugi-agentic-access.yml
 - type: DomainSecurity
