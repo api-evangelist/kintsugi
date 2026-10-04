@@ -113,20 +113,34 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    ExternalId:
+      name: external_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    CustomerRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
+    CustomerPage:
+      $ref: '#/components/schemas/Page'
     Page:
       type: object
       properties:
@@ -142,13 +156,19 @@ components:
           type: integer
         pages:
           type: integer
-    Error:
+    CustomerRequest:
       type: object
       properties:
-        detail:
+        external_id:
           type: string
-        status_code:
-          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
     Customer:
       allOf:
       - $ref: '#/components/schemas/CustomerRequest'
@@ -159,6 +179,13 @@ components:
           created_at:
             type: string
             format: date-time
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
     Address:
       type: object
       properties:
@@ -186,33 +213,6 @@ components:
       required:
       - postal_code
       - country
-    CustomerPage:
-      $ref: '#/components/schemas/Page'
-  parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    ExternalId:
-      name: external_id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

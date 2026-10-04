@@ -110,25 +110,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    Registration:
-      type: object
-      properties:
-        id:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        registration_number:
-          type: string
-        status:
-          type: string
-        effective_date:
-          type: string
-          format: date
-        filing_frequency:
-          type: string
     Error:
       type: object
       properties:
@@ -148,13 +137,24 @@ components:
           format: date
       required:
       - state
-  parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
+    Registration:
+      type: object
+      properties:
+        id:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        registration_number:
+          type: string
+        status:
+          type: string
+        effective_date:
+          type: string
+          format: date
+        filing_frequency:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

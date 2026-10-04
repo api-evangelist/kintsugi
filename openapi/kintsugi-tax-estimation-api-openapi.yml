@@ -43,17 +43,66 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
-    TaxItemEstimate:
+    TransactionItemEstimate:
       type: object
       properties:
-        jurisdiction:
+        external_id:
           type: string
-        jurisdiction_type:
+        external_product_id:
           type: string
-        tax_rate:
+        date:
           type: string
-        tax_amount:
+          format: date-time
+        amount:
+          type: number
+        quantity:
+          type: number
+          default: 1
+        product_name:
           type: string
+        product_category:
+          type: string
+        product_subcategory:
+          type: string
+        exempt:
+          type: boolean
+          default: false
+      required:
+      - amount
+      - date
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    TransactionEstimateResponse:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        total_tax_amount_calculated:
+          type: string
+        taxable_amount:
+          type: string
+        tax_rate_calculated:
+          type: string
+        has_active_registration:
+          type: boolean
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimateResponse'
     TransactionEstimateRequest:
       type: object
       properties:
@@ -86,19 +135,6 @@ components:
       - currency
       - addresses
       - transaction_items
-    CustomerRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        name:
-          type: string
-        email:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
     TransactionItemEstimateResponse:
       allOf:
       - $ref: '#/components/schemas/TransactionItemEstimate'
@@ -116,66 +152,30 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/TaxItemEstimate'
-    TransactionItemEstimate:
+    CustomerRequest:
       type: object
       properties:
         external_id:
           type: string
-        external_product_id:
+        name:
           type: string
-        date:
+        email:
           type: string
-          format: date-time
-        amount:
-          type: number
-        quantity:
-          type: number
-          default: 1
-        product_name:
-          type: string
-        product_category:
-          type: string
-        product_subcategory:
-          type: string
-        exempt:
-          type: boolean
-          default: false
-      required:
-      - amount
-      - date
-    TransactionEstimateResponse:
-      type: object
-      properties:
-        external_id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        currency:
-          type: string
-        total_tax_amount_calculated:
-          type: string
-        taxable_amount:
-          type: string
-        tax_rate_calculated:
-          type: string
-        has_active_registration:
-          type: boolean
         addresses:
           type: array
           items:
             $ref: '#/components/schemas/Address'
-        transaction_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionItemEstimateResponse'
-    Error:
+    TaxItemEstimate:
       type: object
       properties:
-        detail:
+        jurisdiction:
           type: string
-        status_code:
-          type: integer
+        jurisdiction_type:
+          type: string
+        tax_rate:
+          type: string
+        tax_amount:
+          type: string
     Address:
       type: object
       properties:
@@ -204,14 +204,14 @@ components:
       - postal_code
       - country
   responses:
-    ValidationError:
-      description: Request validation failed.
+    Unauthorized:
+      description: Missing or invalid API key or organization ID.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API key or organization ID.
+    ValidationError:
+      description: Request validation failed.
       content:
         application/json:
           schema:

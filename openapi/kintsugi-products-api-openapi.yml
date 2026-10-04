@@ -111,7 +111,61 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   schemas:
+    ProductCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+        description:
+          type: string
+    ProductPage:
+      $ref: '#/components/schemas/Page'
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
     Product:
       allOf:
       - $ref: '#/components/schemas/ProductRequest'
@@ -134,60 +188,6 @@ components:
           type: string
         tax_code:
           type: string
-    Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
-    ProductPage:
-      $ref: '#/components/schemas/Page'
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    ProductCategory:
-      type: object
-      properties:
-        category:
-          type: string
-        subcategory:
-          type: string
-        tax_code:
-          type: string
-        description:
-          type: string
-  parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

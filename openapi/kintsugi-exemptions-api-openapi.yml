@@ -114,18 +114,46 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   schemas:
-    Attachment:
+    ExemptionPage:
+      $ref: '#/components/schemas/Page'
+    ExemptionRequest:
       type: object
       properties:
-        id:
+        external_customer_id:
           type: string
-        filename:
+        state:
           type: string
-        url:
+        exemption_type:
           type: string
-        content_type:
+        valid_from:
           type: string
+          format: date
+        valid_to:
+          type: string
+          format: date
+      required:
+      - external_customer_id
+      - state
     Page:
       type: object
       properties:
@@ -141,15 +169,17 @@ components:
           type: integer
         pages:
           type: integer
-    Error:
+    Attachment:
       type: object
       properties:
-        detail:
+        id:
           type: string
-        status_code:
-          type: integer
-    ExemptionPage:
-      $ref: '#/components/schemas/Page'
+        filename:
+          type: string
+        url:
+          type: string
+        content_type:
+          type: string
     Exemption:
       type: object
       properties:
@@ -169,43 +199,13 @@ components:
         valid_to:
           type: string
           format: date
-    ExemptionRequest:
+    Error:
       type: object
       properties:
-        external_customer_id:
+        detail:
           type: string
-        state:
-          type: string
-        exemption_type:
-          type: string
-        valid_from:
-          type: string
-          format: date
-        valid_to:
-          type: string
-          format: date
-      required:
-      - external_customer_id
-      - state
-  parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
+        status_code:
+          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

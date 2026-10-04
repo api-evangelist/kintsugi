@@ -96,7 +96,30 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
   schemas:
+    FilingPage:
+      $ref: '#/components/schemas/Page'
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
     Filing:
       type: object
       properties:
@@ -144,29 +167,6 @@ components:
           type: string
         status_code:
           type: integer
-    FilingPage:
-      $ref: '#/components/schemas/Page'
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
-  parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

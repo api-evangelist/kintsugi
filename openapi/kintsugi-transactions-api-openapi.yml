@@ -155,50 +155,51 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
 components:
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid API key or organization ID.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: Request validation failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+    Page:
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    ExternalId:
+      name: external_id
+      in: path
+      required: true
+      schema:
+        type: string
   schemas:
-    TransactionRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        currency:
-          type: string
-        status:
-          type: string
-        external_customer_id:
-          type: string
-        addresses:
-          type: array
-          items:
-            $ref: '#/components/schemas/Address'
-        transaction_items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionItemEstimate'
-      required:
-      - external_id
-      - date
-      - currency
-    Transaction:
-      allOf:
-      - $ref: '#/components/schemas/TransactionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-          total_tax_amount_calculated:
-            type: string
-          taxable_amount:
-            type: string
-          created_at:
-            type: string
-            format: date-time
-          updated_at:
-            type: string
-            format: date-time
     TransactionItemEstimate:
       type: object
       properties:
@@ -226,6 +227,70 @@ components:
       required:
       - amount
       - date
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
+    Transaction:
+      allOf:
+      - $ref: '#/components/schemas/TransactionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+          total_tax_amount_calculated:
+            type: string
+          taxable_amount:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+          updated_at:
+            type: string
+            format: date-time
+    TransactionPage:
+      $ref: '#/components/schemas/Page'
+    TransactionRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        status:
+          type: string
+        external_customer_id:
+          type: string
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Address'
+        transaction_items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionItemEstimate'
+      required:
+      - external_id
+      - date
+      - currency
+    CreditNoteRequest:
+      type: object
+      properties:
+        external_id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: number
+        reason:
+          type: string
     Page:
       type: object
       properties:
@@ -241,15 +306,6 @@ components:
           type: integer
         pages:
           type: integer
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
-          type: integer
-    TransactionPage:
-      $ref: '#/components/schemas/Page'
     Address:
       type: object
       properties:
@@ -277,62 +333,6 @@ components:
       required:
       - postal_code
       - country
-    CreditNoteRequest:
-      type: object
-      properties:
-        external_id:
-          type: string
-        date:
-          type: string
-          format: date-time
-        amount:
-          type: number
-        reason:
-          type: string
-  responses:
-    ValidationError:
-      description: Request validation failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid API key or organization ID.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  parameters:
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    ExternalId:
-      name: external_id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
