@@ -54,7 +54,7 @@ tags_raw:
 - AI
 - Tax
 created: '2026-06-21'
-modified: '2026-06-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: kintsugi:kintsugi-address-validation-api
@@ -422,6 +422,8 @@ apis:
   - type: Documentation
     url: https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api
 common:
+- url: https://trykintsugi.com/blog
+  type: Blog
 - type: CapabilityMap
   url: capabilities/kintsugi-capability-edges.yml
   name: Kintsugi Business Capability Map
