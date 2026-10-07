@@ -422,6 +422,8 @@ apis:
   - type: Documentation
     url: https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api
 common:
+- type: Pricing
+  url: https://trykintsugi.com/pricing
 - url: https://trykintsugi.com/blog
   type: Blog
 - type: CapabilityMap
