@@ -1,136 +1,42 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: Kintsugi
-providerId: kintsugi
-created: '2026-06-21'
-modified: '2026-06-21'
-reconciled: false
-tags:
-- Sales Tax
-- Tax Compliance
-- Tax Automation
-- VAT
-- GST
-- Nexus
-- Plans
-description: >-
-  Kintsugi is a sales-led compliance platform priced around free nexus
-  monitoring plus per-action or flat-rate filing and registration fees rather
-  than per-API-call metering. Public tiers reported include a free monitoring
-  plan, a per-action Growth plan billed per filing or registration, and a
-  flat-rate Premium plan covering a set number of states. There are no
-  published per-API-request prices; the API is included with a paid plan and
-  pricing is finalized through Kintsugi sales. Values here are not reconciled
-  and must be confirmed with the provider.
-notes: >-
-  Pricing for sales-tax compliance vendors changes frequently and is partly
-  sales-negotiated. Confirm current tier names, per-filing and per-registration
-  fees, and included-state counts on the Kintsugi pricing page during
-  reconciliation.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://trykintsugi.com/pricing
 sources:
-- https://www.trykintsugi.com/pricing
-- https://docs.trykintsugi.com
+- https://trykintsugi.com/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T112025
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: usage-other
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+published: true
+note: Sales tax automation pricing page; API access only on custom-priced Premium tier. No onboarding
+  or transaction fees stated.
+plan_count: 3
+currency: USD
 plans:
-- id: kintsugi-free
-  name: Free / Nexus Monitoring
-  type: free
-  description: >-
-    No-cost economic and physical nexus monitoring and exposure tracking
-    across states, intended to surface where the business is approaching or
-    has crossed registration thresholds.
-  entries:
-  - label: Nexus Monitoring
-    name: nexus_monitoring
-    type: free
-    metric: states
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: $0
-    userMultiplied: false
-  elements:
-  - name: Nexus Monitoring
-  - name: Exposure Tracking
-- id: kintsugi-growth
-  name: Growth
-  type: usage
-  description: >-
-    Per-action plan that bills a flat fee for each sales tax filing or each
-    state registration performed on the customer's behalf, with no
-    transaction fees or annual contract reported.
-  entries:
-  - label: Sales Tax Filing
-    name: filing
-    type: usage
-    metric: filings
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: from $75 per filing
-    userMultiplied: false
-  - label: State Registration
-    name: registration
-    type: usage
-    metric: registrations
-    limit: -1
-    timeFrame: usage
-    geo: global
-    unit: 1
-    price: from $75 per registration
-    userMultiplied: false
-  elements:
-  - name: Tax Calculation API
-  - name: Automated Filing
-  - name: Registration
-  - name: Nexus Monitoring
-- id: kintsugi-premium
-  name: Premium
-  type: subscription
-  description: >-
-    Flat monthly subscription reported to cover filings across a set number of
-    states for predictable budgeting at higher filing volume.
-  entries:
-  - label: Premium Monthly
-    name: premium_monthly
-    type: flat
-    metric: subscription
-    limit: -1
-    timeFrame: month
-    geo: global
-    unit: 1
-    price: reported ~$500/month covering up to ~7 states
-    userMultiplied: false
-  elements:
-  - name: Tax Calculation API
-  - name: Automated Filing
-  - name: Registration
-  - name: Nexus Monitoring
-  - name: Exemption Management
-- id: kintsugi-enterprise
-  name: Enterprise
-  type: enterprise
-  description: >-
-    Custom agreements for higher-volume or multi-entity sellers, including
-    broader state coverage, VAT/GST support, and negotiated terms. Contact
-    Kintsugi sales.
-  entries:
-  - label: Enterprise Agreement
-    name: enterprise
-    type: flat
-    metric: contract
-    limit: -1
-    timeFrame: year
-    geo: global
-    unit: 1
-    price: contact sales
-    userMultiplied: false
-  elements:
-  - name: Custom State Coverage
-  - name: VAT / GST Compliance
-  - name: Priority Support
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+- name: Free
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  included_quota: Global exposure (nexus) monitoring, historical liability auditing, nexus threshold alerts,
+    AI-powered product categorization, address validation, Kin, CSV imports, no-code integrations
+- name: Starter
+  price_text: Starting at $75
+  price: 75
+  currency: USD
+  period: per-use
+  unit: Per filing or registration
+  included_quota: Automated registrations, filings, remittance; basic ECM; virtual mailbox; 24/7 live
+    chat
+- name: Premium
+  price_text: Custom
+  period: none
+  included_quota: Multi-country compliance, API/SDK/SSO, VDAs, dedicated teams; flat-rate pricing with
+    volume-based discounts
