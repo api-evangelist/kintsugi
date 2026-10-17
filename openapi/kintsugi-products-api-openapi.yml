@@ -104,13 +104,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/ProductCategory'
 components:
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Id:
       name: id
@@ -118,32 +111,26 @@ components:
       required: true
       schema:
         type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
     Page:
       name: page
       in: query
       schema:
         type: integer
         default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ProductCategory:
-      type: object
-      properties:
-        category:
-          type: string
-        subcategory:
-          type: string
-        tax_code:
-          type: string
-        description:
-          type: string
-    ProductPage:
-      $ref: '#/components/schemas/Page'
     Error:
       type: object
       properties:
@@ -151,28 +138,6 @@ components:
           type: string
         status_code:
           type: integer
-    Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
-    Product:
-      allOf:
-      - $ref: '#/components/schemas/ProductRequest'
-      - type: object
-        properties:
-          id:
-            type: string
     ProductRequest:
       type: object
       properties:
@@ -188,6 +153,41 @@ components:
           type: string
         tax_code:
           type: string
+    Product:
+      allOf:
+      - $ref: '#/components/schemas/ProductRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+    ProductPage:
+      $ref: '#/components/schemas/Page'
+    ProductCategory:
+      type: object
+      properties:
+        category:
+          type: string
+        subcategory:
+          type: string
+        tax_code:
+          type: string
+        description:
+          type: string
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

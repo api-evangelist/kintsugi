@@ -106,56 +106,32 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
-    Id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
-    Page:
-      name: page
-      in: query
-      schema:
-        type: integer
-        default: 1
     ExternalId:
       name: external_id
       in: path
       required: true
       schema:
         type: string
-  schemas:
-    CustomerPage:
-      $ref: '#/components/schemas/Page'
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
     Page:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            type: object
-        total:
-          type: integer
-        page:
-          type: integer
-        size:
-          type: integer
-        pages:
-          type: integer
+      name: page
+      in: query
+      schema:
+        type: integer
+        default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+  schemas:
     CustomerRequest:
       type: object
       properties:
@@ -169,16 +145,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Address'
-    Customer:
-      allOf:
-      - $ref: '#/components/schemas/CustomerRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-          created_at:
-            type: string
-            format: date-time
+    CustomerPage:
+      $ref: '#/components/schemas/Page'
     Error:
       type: object
       properties:
@@ -213,6 +181,38 @@ components:
       required:
       - postal_code
       - country
+    Customer:
+      allOf:
+      - $ref: '#/components/schemas/CustomerRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+          created_at:
+            type: string
+            format: date-time
+    Page:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            type: object
+        total:
+          type: integer
+        page:
+          type: integer
+        size:
+          type: integer
+        pages:
+          type: integer
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

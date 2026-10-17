@@ -103,13 +103,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Registration'
 components:
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Id:
       name: id
@@ -117,6 +110,13 @@ components:
       required: true
       schema:
         type: string
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Error:
       type: object
@@ -125,18 +125,6 @@ components:
           type: string
         status_code:
           type: integer
-    RegistrationRequest:
-      type: object
-      properties:
-        state:
-          type: string
-        country:
-          type: string
-        effective_date:
-          type: string
-          format: date
-      required:
-      - state
     Registration:
       type: object
       properties:
@@ -155,6 +143,18 @@ components:
           format: date
         filing_frequency:
           type: string
+    RegistrationRequest:
+      type: object
+      properties:
+        state:
+          type: string
+        country:
+          type: string
+        effective_date:
+          type: string
+          format: date
+      required:
+      - state
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

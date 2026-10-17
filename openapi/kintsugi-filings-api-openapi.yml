@@ -89,13 +89,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/FilingPage'
 components:
-  responses:
-    NotFound:
-      description: Resource not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     Id:
       name: id
@@ -103,21 +96,33 @@ components:
       required: true
       schema:
         type: string
-    Size:
-      name: size
-      in: query
-      schema:
-        type: integer
-        default: 50
     Page:
       name: page
       in: query
       schema:
         type: integer
         default: 1
+    Size:
+      name: size
+      in: query
+      schema:
+        type: integer
+        default: 50
+  responses:
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    FilingPage:
-      $ref: '#/components/schemas/Page'
+    Error:
+      type: object
+      properties:
+        detail:
+          type: string
+        status_code:
+          type: integer
     TransactionPage:
       $ref: '#/components/schemas/Page'
     Filing:
@@ -145,6 +150,8 @@ components:
         filed_at:
           type: string
           format: date-time
+    FilingPage:
+      $ref: '#/components/schemas/Page'
     Page:
       type: object
       properties:
@@ -159,13 +166,6 @@ components:
         size:
           type: integer
         pages:
-          type: integer
-    Error:
-      type: object
-      properties:
-        detail:
-          type: string
-        status_code:
           type: integer
   securitySchemes:
     ApiKeyAuth:
