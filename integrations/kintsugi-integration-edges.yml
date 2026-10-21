@@ -1,10 +1,31 @@
 generated: '2026-10-15'
 method: searched
 checked:
+- chargebee/integrations/chargebee-integration-edges.yml
 - stripe/integrations/stripe-integration-edges.yml
+- https://advertising.amazon.com/partners/directory
+- https://sellercentral.amazon.com/gspn
+- https://sellercentral.amazon.com/selling-partner-appstore
 source:
 - stripe/integrations/stripe-integration-edges.yml
 edges:
+- partner_name: Chargebee (own)
+  partner: chargebee
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.chargebee.com/apps/['kintsugi']
+  mirror_of: chargebee/integrations/chargebee-integration-edges.yml
+  apps:
+  - API Key
+  listing_count: 1
+  detected: '2026-10-19'
+  detected_by: mirror-platform-listings.py
+  category: Tax Management
 - partner_name: Stripe (own)
   partner: stripe
   partner_match: mirror
@@ -22,3 +43,18 @@ edges:
   detected: '2026-10-15'
   detected_by: mirror-platform-listings.py
   category: tax
+- partner_name: Amazon Selling Partner Appstore
+  partner: amazon-seller-central
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://sellercentral.amazon.com/selling-partner-appstore/dp/amzn1.sp.solution.e489594c-2e97-4acc-8894-f97edef002ae
+  mirror_of: amazon-seller-central/integrations/amazon-seller-central-integration-edges.yml
+  apps:
+  - Kintsugi AI
+  detected: '2026-10-21'
+  detected_by: sweep-amazon-sp-api-appstore.py
