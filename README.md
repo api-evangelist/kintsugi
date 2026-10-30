@@ -1,4 +1,4 @@
-# Kintsugi (kintsugi)
+# Kintsugi
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,182 +66,141 @@
 
 Kintsugi is an AI-driven sales tax compliance and automation platform that calculates US sales tax, VAT, and GST in real time, monitors economic and physical nexus, manages exemptions and registrations, and auto-prepares and files returns. Its REST API exposes tax estimation, transactions, products, address validation, nexus, exemptions, registrations, and filings, authenticated with an API key plus organization ID header.
 
-> Disambiguation: this is Kintsugi the sales tax automation company (trykintsugi.com), not the unrelated Kintsugi mental-health / voice-biomarker company.
+**Areas:** Sales Tax · Tax Compliance · Tax Automation · VAT · GST · Nexus · Artificial Intelligence · Tax
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/kintsugi/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/kintsugi/refs/heads/main/apis.yml)
+## Kintsugi on APIs.io
 
-## Tags
+Everything profiled for Kintsugi is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kintsugi/](https://apis.io/providers/kintsugi/)** — or go straight to one of the APIs or properties below.
 
-- Sales Tax
-- Tax Compliance
-- Tax Automation
-- VAT
-- GST
-- Nexus
-- AI
+### APIs (9)
 
-## Timestamps
+- [Kintsugi Address Validation API](https://apis.io/apis/kintsugi/kintsugi-address-validation-api/) — Address search and suggestions for jurisdiction assignment.
+- [Kintsugi Customers API](https://apis.io/apis/kintsugi/kintsugi-customers-api/) — Customer records and their transactions.
+- [Kintsugi Exemptions API](https://apis.io/apis/kintsugi/kintsugi-exemptions-api/) — Customer tax exemptions and certificates.
+- [Kintsugi Filings API](https://apis.io/apis/kintsugi/kintsugi-filings-api/) — Prepared and submitted sales tax returns.
+- [Kintsugi Nexus API](https://apis.io/apis/kintsugi/kintsugi-nexus-api/) — Physical and economic nexus tracking.
+- [Kintsugi Products API](https://apis.io/apis/kintsugi/kintsugi-products-api/) — Product records and taxability classification.
+- [Kintsugi Registrations API](https://apis.io/apis/kintsugi/kintsugi-registrations-api/) — State tax registrations.
+- [Kintsugi Tax Estimation API](https://apis.io/apis/kintsugi/kintsugi-tax-estimation-api/) — Real-time sales tax, VAT, and GST estimation.
+- [Kintsugi Transactions API](https://apis.io/apis/kintsugi/kintsugi-transactions-api/) — Committed sales transactions and credit notes.
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Kintsugi Tax Calculations API
+#### MCP servers (1)
 
-Calculates sales tax, VAT, and GST for a transaction before payment via POST /tax/estimate, returning jurisdiction-level tax breakdown, taxable amount, effective rate, and active-registration status without persisting a record.
+Model Context Protocol servers that expose the API to agents.
 
-- **Human URL:** [https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations](https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations)
-- **Base URL:** `https://api.trykintsugi.com/v1`
+- [kintsugi](https://apis.io/servers/kintsugi/kintsugi/)
 
-#### Tags
+#### Agentic access (1)
 
-- Tax Calculation
-- Tax Estimate
-- Sales Tax
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Properties
+- [Kintsugi Agentic Access](https://apis.io/agentic-access/kintsugi/kintsugi-agentic-access/)
 
-- [Documentation](https://docs.trykintsugi.com/docs/api-guides/sales-tax-calculations)
-- [API Reference](https://docs.trykintsugi.com/reference/api/tax-estimation/estimate-tax)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kintsugi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kintsugi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Collections (10)
 
-### Kintsugi Transactions API
+Postman and Open Collection request collections.
 
-Creates, retrieves, and updates committed sales transactions and credit notes, with lookup by Kintsugi ID, external ID, customer, or filing, to drive accurate liability and return preparation.
+- [Kintsugi Tax API](https://apis.io/collections/kintsugi/open-kintsugi/)
+- [Kintsugi Tax Address Validation API](https://apis.io/collections/kintsugi/open-kintsugi-address-validation-api/)
+- [Kintsugi Tax Address Validation Customers API](https://apis.io/collections/kintsugi/open-kintsugi-customers-api/)
+- [Kintsugi Tax Address Validation Exemptions API](https://apis.io/collections/kintsugi/open-kintsugi-exemptions-api/)
+- [Kintsugi Tax Address Validation Filings API](https://apis.io/collections/kintsugi/open-kintsugi-filings-api/)
+- [Kintsugi Tax Address Validation Nexus API](https://apis.io/collections/kintsugi/open-kintsugi-nexus-api/)
+- [Kintsugi Tax Address Validation Products API](https://apis.io/collections/kintsugi/open-kintsugi-products-api/)
+- [Kintsugi Tax Address Validation Registrations API](https://apis.io/collections/kintsugi/open-kintsugi-registrations-api/)
+- [Kintsugi Tax Address Validation Tax Estimation API](https://apis.io/collections/kintsugi/open-kintsugi-tax-estimation-api/)
+- [Kintsugi Tax Address Validation Transactions API](https://apis.io/collections/kintsugi/open-kintsugi-transactions-api/)
 
-- **Human URL:** [https://docs.trykintsugi.com/docs/api-guides/syncing-transaction-records](https://docs.trykintsugi.com/docs/api-guides/syncing-transaction-records)
-- **Base URL:** `https://api.trykintsugi.com/v1`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Transactions
-- Credit Notes
-- Filings
+- [Kintsugi Authentication](https://apis.io/security/kintsugi/kintsugi-authentication/)
+- [Kintsugi Domain Security](https://apis.io/security/kintsugi/kintsugi-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.trykintsugi.com/docs/api-guides/syncing-transaction-records)
-- [API Reference](https://docs.trykintsugi.com/reference/api/transactions/create-transaction)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kintsugi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kintsugi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Kintsugi Products and Tax Codes API
+- [Kintsugi Plans Pricing](https://apis.io/plans/kintsugi/kintsugi-plans-pricing/)
 
-Manages product records and their taxability classification, including listing product categories used to map catalog items to the correct tax treatment across jurisdictions.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.trykintsugi.com/docs/api-guides/product-customer-records](https://docs.trykintsugi.com/docs/api-guides/product-customer-records)
-- **Base URL:** `https://api.trykintsugi.com/v1`
+Published request limits.
 
-#### Tags
+- [Kintsugi Rate Limits](https://apis.io/rate-limits/kintsugi/kintsugi-rate-limits/)
 
-- Products
-- Tax Codes
-- Product Categories
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.trykintsugi.com/docs/api-guides/product-customer-records)
-- [API Reference](https://docs.trykintsugi.com/reference/api/products/create-product)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kintsugi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kintsugi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Kintsugi Finops](https://apis.io/finops/kintsugi/kintsugi-finops/)
 
-### Kintsugi Addresses and Nexus API
+## Where to find this API
 
-Validates and suggests addresses for accurate jurisdiction assignment, and manages physical nexus and state registrations so liability tracking reflects where the business is obligated to collect tax.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.trykintsugi.com/reference/api/address-validation/search](https://docs.trykintsugi.com/reference/api/address-validation/search)
-- **Base URL:** `https://api.trykintsugi.com/v1`
-
-#### Tags
-
-- Address Validation
-- Nexus
-- Registrations
-
-#### Properties
-
-- [Documentation](https://docs.trykintsugi.com/reference/api/address-validation/search)
-- [API Reference](https://docs.trykintsugi.com/reference/api/nexus/get-nexus-for-org)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kintsugi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kintsugi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kintsugi Exemptions API
-
-Creates and lists customer tax exemptions and uploads or retrieves exemption certificate attachments, so exempt sales are excluded from calculated liability with documentation on file.
-
-- **Human URL:** [https://docs.trykintsugi.com/reference/api/exemptions/get-exemptions](https://docs.trykintsugi.com/reference/api/exemptions/get-exemptions)
-- **Base URL:** `https://api.trykintsugi.com/v1`
-
-#### Tags
-
-- Exemptions
-- Certificates
-- Compliance
-
-#### Properties
-
-- [Documentation](https://docs.trykintsugi.com/reference/api/exemptions/get-exemptions)
-- [API Reference](https://docs.trykintsugi.com/reference/api/exemptions/create-exemption)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kintsugi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kintsugi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kintsugi Filings API
-
-Retrieves prepared and submitted sales tax returns, including filings by ID and by registration, giving programmatic visibility into the automated filing lifecycle Kintsugi runs on the customer's behalf.
-
-- **Human URL:** [https://docs.trykintsugi.com/reference/api/filings/get-filings](https://docs.trykintsugi.com/reference/api/filings/get-filings)
-- **Base URL:** `https://api.trykintsugi.com/v1`
-
-#### Tags
-
-- Filings
-- Returns
-- Registrations
-
-#### Properties
-
-- [Documentation](https://docs.trykintsugi.com/reference/api/filings/get-filings)
-- [API Reference](https://docs.trykintsugi.com/reference/api/filings/get-filing-by-id)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/kintsugi.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/kintsugi.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Kintsugi Webhooks
-
-Event notifications that let integrations react to changes such as nexus thresholds being approached, registrations completing, and filings being prepared or submitted, keeping external systems in sync with compliance state.
-
-- **Human URL:** [https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api](https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api)
-- **Base URL:** `https://api.trykintsugi.com/v1`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://docs.trykintsugi.com/docs/guides/integrating-kintsugis-api)
-- [OpenAPI](openapi/kintsugi-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/kintsugi-tax)
-- [LinkedIn](https://www.linkedin.com/company/trykintsugi)
 - [Website](https://www.trykintsugi.com)
 - [Documentation](https://docs.trykintsugi.com)
-- [Plans](plans/kintsugi-plans-pricing.yml)
-- [Rate Limits](rate-limits/kintsugi-rate-limits.yml)
-- [Fin Ops](finops/kintsugi-finops.yml)
+- [Pricing](https://trykintsugi.com/pricing)
+- [Blog](https://trykintsugi.com/blog)
+- [GitHub](https://github.com/kintsugi-tax)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 38.1** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 47.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 42.1 |
+
+**Agent readiness 44.2** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kintsugi/](https://apis.io/providers/kintsugi/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kintsugi: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kintsugi/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
